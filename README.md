@@ -8,6 +8,7 @@ Try running the following commands:
 - dbt test
 - hello
 - there
+- From new branch
 
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
