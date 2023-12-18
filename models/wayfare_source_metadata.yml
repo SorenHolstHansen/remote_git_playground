@@ -1,0 +1,36 @@
+# THIS FILE IS AUTO GENERATED. DO NOT MODIFY
+version: 2
+sources:
+  - name: wayfare
+    description: source
+    database: postgres
+    schema: target
+    loader: wayfare
+    loaded_at_field: _wayfare_updated_at
+    tables:
+      - name: lshjf____dummy_source_dataset
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
+          - name: dummy_col
+            tags: []
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+            tags: []
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+            tags: []
+      - name: lshjf____blns_dataset
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
+          - name: blns_col
+            tags: []
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+            tags: []
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+            tags: []
