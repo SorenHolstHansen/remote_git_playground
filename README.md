@@ -9,6 +9,7 @@ Try running the following commands:
 - hello
 - author test
 - second author test
+- sdlfjh
 
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
