@@ -8,29 +8,68 @@ sources:
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
     tables:
-      - name: lshjf____dummy_source_dataset
+      - name: productcategories
         description: ''
         loaded_at_field: _wayfare_updated_at
         tags: []
         columns:
-          - name: dummy_col
-            tags: []
           - name: _wayfare_created_at
             description: The transaction time at which the row was created by Wayfare
             tags: []
           - name: _wayfare_updated_at
             description: The transaction time at which the row was last updated by Wayfare
             tags: []
-      - name: lshjf____blns_dataset
+          - name: categoryname
+            tags: []
+          - name: productcategorykey
+            tags: []
+      - name: products
         description: ''
         loaded_at_field: _wayfare_updated_at
         tags: []
         columns:
-          - name: blns_col
-            tags: []
           - name: _wayfare_created_at
             description: The transaction time at which the row was created by Wayfare
             tags: []
           - name: _wayfare_updated_at
             description: The transaction time at which the row was last updated by Wayfare
+            tags: []
+          - name: modelname
+            tags: []
+          - name: productcolor
+            tags: []
+          - name: productcost
+            tags: []
+          - name: productdescription
+            tags: []
+          - name: productkey
+            tags: []
+          - name: productname
+            tags: []
+          - name: productprice
+            tags: []
+          - name: productsize
+            tags: []
+          - name: productsku
+            tags: []
+          - name: productstyle
+            tags: []
+          - name: productsubcategorykey
+            tags: []
+      - name: productsubcategories
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+            tags: []
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+            tags: []
+          - name: productcategorykey
+            tags: []
+          - name: productsubcategorykey
+            tags: []
+          - name: subcategoryname
             tags: []
