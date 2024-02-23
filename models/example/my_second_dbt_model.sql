@@ -1,6 +1,2 @@
-
--- Use the `ref` function to select from other models
-
-select *
-from {{ ref('my_first_dbt_model') }}
-where id = 3
+select my_first_dbt_model.id as id
+from {{ ref('my_first_dbt_model') }} as my_first_dbt_model
