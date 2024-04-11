@@ -1,27 +1,15 @@
-
-/*
-    Welcome to your first dbt model!
-    Did you know that you can also configure models directly within SQL files?
-    This will override configurations stated in dbt_project.yml
-
-    Try changing "table" to "view" below
-*/
-
-{{ config(materialized='table') }}
-
-with source_data as (
-
-    select 1 as id
-    union all
-    select null as id
-
-)
-
-select *
-from source_data
-
-/*
-    Uncomment the line below to remove records with null `id` values
-*/
-
--- where id is not null
+select
+    product._wayfare_created_at as _wayfare_created_at,
+    product._wayfare_updated_at as _wayfare_updated_at,
+    product.modelname as modelname,
+    product.productcolor as productcolor,
+    product.productcost as productcost,
+    product.productdescription as productdescription,
+    product.productkey as productkey,
+    product.productname as productname,
+    product.productprice as productprice,
+    product.productsize as productsize,
+    product.productsku as productsku,
+    product.productstyle as productstyle,
+    product.productsubcategorykey as productsubcategorykey
+from {{ source('wayfare', 'product') }} as product
