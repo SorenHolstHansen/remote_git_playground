@@ -4,7 +4,7 @@ models:
   - name: my_first_dbt_model
     description: "A starter dbt model"
     columns:
-      - name: id
+      - name: modelname
         description: "The primary key for this table"
         tests:
           - unique
