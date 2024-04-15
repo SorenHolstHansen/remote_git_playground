@@ -692,6 +692,39 @@ sources:
             tags: []
           - name: schedule_id
             tags: []
+      - name: produc
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+            tags: []
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+            tags: []
+          - name: modelname
+            tags: []
+          - name: productcolor
+            tags: []
+          - name: productcost
+            tags: []
+          - name: productdescription
+            tags: []
+          - name: productkey
+            tags: []
+          - name: productname
+            tags: []
+          - name: productprice
+            tags: []
+          - name: productsize
+            tags: []
+          - name: productsku
+            tags: []
+          - name: productstyle
+            tags: []
+          - name: productsubcategorykey
+            tags: []
       - name: product
         description: ''
         loaded_at_field: _wayfare_updated_at
