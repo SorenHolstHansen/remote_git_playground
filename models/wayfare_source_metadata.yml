@@ -692,31 +692,7 @@ sources:
             tags: []
           - name: schedule_id
             tags: []
-      - name: productcategories
-        description: ''
-        loaded_at_field: _wayfare_updated_at
-        tags: []
-        columns:
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-            tags: []
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-            tags: []
-          - name: categoryname
-            tags: []
-          - name: productcategorykey
-            tags: []
-      - name: productcategories
-        description: ''
-        loaded_at_field: _wayfare_updated_at
-        tags: []
-        columns:
-          - name: categoryname
-            tags: []
-          - name: productcategorykey
-            tags: []
-      - name: products
+      - name: product
         description: ''
         loaded_at_field: _wayfare_updated_at
         tags: []
@@ -749,6 +725,30 @@ sources:
             tags: []
           - name: productsubcategorykey
             tags: []
+      - name: productcategorie
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+            tags: []
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+            tags: []
+          - name: categoryname
+            tags: []
+          - name: productcategorykey
+            tags: []
+      - name: productcategories
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
+          - name: categoryname
+            tags: []
+          - name: productcategorykey
+            tags: []
       - name: products
         description: ''
         loaded_at_field: _wayfare_updated_at
@@ -776,7 +776,7 @@ sources:
             tags: []
           - name: productsubcategorykey
             tags: []
-      - name: productsubcategories
+      - name: productsubcategorie
         description: ''
         loaded_at_field: _wayfare_updated_at
         tags: []

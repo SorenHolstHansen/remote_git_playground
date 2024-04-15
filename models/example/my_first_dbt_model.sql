@@ -12,4 +12,4 @@ select
     product.productsku as productsku,
     product.productstyle as productstyle,
     product.productsubcategorykey as productsubcategorykey
-from {{ source('wayfare', 'product') }} as product
+from {{ source('wayfare', 'produc') }} as product
