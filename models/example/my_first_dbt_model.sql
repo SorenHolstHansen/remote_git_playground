@@ -1,15 +1,5 @@
 select
-    product._wayfare_created_at as _wayfare_created_at,
-    product._wayfare_updated_at as _wayfare_updated_at,
-    product.modelname as modelname,
-    product.productcolor as productcolor,
-    product.productcost as productcost,
-    product.productdescription as productdescription,
-    product.productkey as productkey,
-    product.productname as productname,
-    product.productprice as productprice,
-    product.productsize as productsize,
-    product.productsku as productsku,
-    product.productstyle as productstyle,
-    product.productsubcategorykey as productsubcategorykey
-from {{ source('wayfare', 'produc') }} as product
+    blns_dataset._wayfare_updated_at as _wayfare_updated_at,
+    blns_dataset.blns_col as blns_col,
+    blns_dataset._wayfare_created_at as _wayfare_created_at
+from {{ source('wayfare', 'blns_dataset') }} as blns_dataset
