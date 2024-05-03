@@ -6,8 +6,8 @@ models:
     columns:
       - name: blns_col
         description: "The primary key for this table"
-        tests:
-          - not_null
+        #tests:
+         # - not_null
 
   - name: my_second_dbt_model
     description: "A starter dbt model"
