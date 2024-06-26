@@ -3,63 +3,31 @@ version: 2
 sources:
   - database: postgres
     name: wayfare
-    description: source
+    description: Sources synced from wayfare
     schema: target
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
     tables:
-      - name: blns_dataset
-        description: ''
-        loaded_at_field: _wayfare_updated_at
-        tags: []
-        columns:
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-            tags: []
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-            tags: []
-          - name: blns_col
-            tags: []
-      - name: dummy_source_dataset
-        description: ''
-        loaded_at_field: _wayfare_updated_at
-        tags: []
-        columns:
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-            tags: []
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-            tags: []
-          - name: dummy_col
-            tags: []
       - name: productcategories
         description: ''
         loaded_at_field: _wayfare_updated_at
         tags: []
         columns:
+          - name: categoryname
+            tags: []
+          - name: productcategorykey
+            tags: []
           - name: _wayfare_created_at
             description: The transaction time at which the row was created by Wayfare
             tags: []
           - name: _wayfare_updated_at
             description: The transaction time at which the row was last updated by Wayfare
-            tags: []
-          - name: categoryname
-            tags: []
-          - name: productcategorykey
             tags: []
       - name: products
         description: ''
         loaded_at_field: _wayfare_updated_at
         tags: []
         columns:
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-            tags: []
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-            tags: []
           - name: modelname
             tags: []
           - name: productcolor
@@ -82,20 +50,26 @@ sources:
             tags: []
           - name: productsubcategorykey
             tags: []
-      - name: productsubcategories
-        description: ''
-        loaded_at_field: _wayfare_updated_at
-        tags: []
-        columns:
           - name: _wayfare_created_at
             description: The transaction time at which the row was created by Wayfare
             tags: []
           - name: _wayfare_updated_at
             description: The transaction time at which the row was last updated by Wayfare
             tags: []
+      - name: productsubcategories
+        description: ''
+        loaded_at_field: _wayfare_updated_at
+        tags: []
+        columns:
           - name: productcategorykey
             tags: []
           - name: productsubcategorykey
             tags: []
           - name: subcategoryname
+            tags: []
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+            tags: []
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
             tags: []
