@@ -8,5 +8,5 @@ with sub as (
 
 select
     _wayfare_updated_at,
-    blns_col
+    blns_col || 'hi'
 from sub
