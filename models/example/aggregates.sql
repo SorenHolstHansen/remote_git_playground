@@ -1,0 +1,1 @@
+SELECT a.categoryname FROM {{ source('wayfare', 'productcategories') }} AS a
