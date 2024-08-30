@@ -4,7 +4,7 @@ sources:
   - database: postgres
     name: wayfare
     description: Sources synced from wayfare
-    schema: raw
+    schema: target
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
     tables:
