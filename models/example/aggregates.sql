@@ -1,1 +1,1 @@
-SELECT a.categoryname as TOTAL_COST, 1 as MAN FROM {{ source('wayfare', 'productcategories') }} AS a
+SELECT a.categoryname as TOTAL_COST, 1 as TIS FROM {{ source('wayfare', 'productcategories') }} AS a
