@@ -1,1 +1,1 @@
-SELECT a.categoryname as TOTAL_COST, 1 as THERE FROM {{ source('wayfare', 'productcategories') }} AS a
+SELECT a.categoryname as TOTAL_COST, 1 as HELLO FROM {{ source('wayfare', 'productcategories') }} AS a
