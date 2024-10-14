@@ -18,4 +18,51 @@
 # and any added properties might be reordered.
 
 version: 2
-sources: []
+sources:
+  - database: warehouse
+    name: pg_sync
+    description: Sources from the pg_sync sync
+    schema: target
+    loader: wayfare
+    loaded_at_field: _wayfare_updated_at
+    tables:
+      - name: productcategories
+        description: ""
+        loaded_at_field: _wayfare_updated_at
+        columns:
+          - name: categoryname
+          - name: productcategorykey
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: products
+        description: ""
+        loaded_at_field: _wayfare_updated_at
+        columns:
+          - name: modelname
+          - name: productcolor
+          - name: productcost
+          - name: productdescription
+          - name: productkey
+          - name: productname
+          - name: productprice
+          - name: productsize
+          - name: productsku
+          - name: productstyle
+          - name: productsubcategorykey
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: productsubcategories
+        description: ""
+        loaded_at_field: _wayfare_updated_at
+        columns:
+          - name: productcategorykey
+          - name: productsubcategorykey
+          - name: subcategoryname
+          - name: _wayfare_created_at
+            description: The transaction time at which the row was created by Wayfare
+          - name: _wayfare_updated_at
+            description: The transaction time at which the row was last updated by Wayfare
