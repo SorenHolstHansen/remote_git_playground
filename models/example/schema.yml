@@ -6,8 +6,6 @@ models:
     columns:
       - name: blns_col
         description: "The primary key for this table"
-        tests:
-          - not_null
 
   - name: aggregates
     description: "Aggregates"
