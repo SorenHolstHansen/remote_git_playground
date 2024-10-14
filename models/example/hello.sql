@@ -4,4 +4,4 @@ select
     productcategories.categoryname as categoryname,
     productcategories.productcategorykey as productcategorykey
     
-from {{ source('wayfare', 'productcategories') }} as productcategories
+from {{ source('pg_sync', 'productcategories') }} as productcategories
