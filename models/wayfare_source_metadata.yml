@@ -67,8 +67,8 @@ sources:
           - name: _wayfare_updated_at
             description: The transaction time at which the row was last updated by Wayfare
   - database: warehouse
-    name: test_sync_name
-    description: Sources from the test_sync_name sync
+    name: dummy_sync
+    description: Sources from the dummy_sync sync
     schema: target
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
