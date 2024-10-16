@@ -49,3 +49,13 @@ sources:
           - name: productcategorykey
           - name: productsubcategorykey
           - name: subcategoryname
+  - database: warehouse
+    name: wayfare_unmanaged
+    description: Unmanaged sources in the warehouse
+    schema: target
+    tables:
+      - name: aggregates
+        description: ""
+        columns:
+          - name: tis
+          - name: total_cost
