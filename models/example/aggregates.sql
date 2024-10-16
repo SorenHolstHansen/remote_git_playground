@@ -1,0 +1,1 @@
+SELECT a.categoryname as TOTAL_COST, 1 as TIS FROM {{ source('pgsync', 'productcategories') }} AS a

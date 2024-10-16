@@ -20,8 +20,8 @@
 version: 2
 sources:
   - database: warehouse
-    name: pg_sync
-    description: Sources from the pg_sync sync
+    name: pgsync
+    description: Sources from the pgsync sync
     schema: target
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
@@ -67,8 +67,8 @@ sources:
           - name: _wayfare_updated_at
             description: The transaction time at which the row was last updated by Wayfare
   - database: warehouse
-    name: dummy_sync
-    description: Sources from the dummy_sync sync
+    name: test
+    description: Sources from the test sync
     schema: target
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
@@ -146,6 +146,7 @@ sources:
           - name: integer_64
           - name: integer_8
           - name: json
+          - name: json_object
           - name: map
           - name: map_any
           - name: map_huge_int_key
