@@ -58,4 +58,6 @@ sources:
         description: ""
         columns:
           - name: tis
+            tests:
+              - not_null
           - name: total_cost
