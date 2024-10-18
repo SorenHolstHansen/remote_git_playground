@@ -1,0 +1,71 @@
+version: "0.1"
+syncs:
+  - id: a59d8217-e5b2-42c8-b0a0-b45e4f4dfa18
+    connection_id: 6d7f4db2-be71-4668-935a-5b3981b91587
+    name: pgsync
+    description: ""
+    extraction_concurrency:
+      num_workers: 1
+    file_storage:
+      folder_path: ""
+      file_details:
+        type: PARQUET
+      batch_size: 250000
+      delete_after_sync: true
+    data_sets:
+      - unique_id: warehouse.source.products
+        target_name: products
+        data_extraction_config:
+          name: Full Extract
+          values: null
+        loading_option:
+          type: Truncate and insert
+        data_fields:
+          - unique_id: warehouse.source.products.productsku
+            target_name: productsku
+          - unique_id: warehouse.source.products.productsubcategorykey
+            target_name: productsubcategorykey
+          - unique_id: warehouse.source.products.productcost
+            target_name: productcost
+          - unique_id: warehouse.source.products.productstyle
+            target_name: productstyle
+          - unique_id: warehouse.source.products.productsize
+            target_name: productsize
+          - unique_id: warehouse.source.products.productcolor
+            target_name: productcolor
+          - unique_id: warehouse.source.products.productdescription
+            target_name: productdescription
+          - unique_id: warehouse.source.products.productname
+            target_name: productname
+          - unique_id: warehouse.source.products.modelname
+            target_name: modelname
+          - unique_id: warehouse.source.products.productkey
+            target_name: productkey
+          - unique_id: warehouse.source.products.productprice
+            target_name: productprice
+      - unique_id: warehouse.source.productsubcategories
+        target_name: productsubcategories
+        data_extraction_config:
+          name: Full Extract
+          values: null
+        loading_option:
+          type: Truncate and insert
+        data_fields:
+          - unique_id: warehouse.source.productsubcategories.productcategorykey
+            target_name: productcategorykey
+          - unique_id: warehouse.source.productsubcategories.productsubcategorykey
+            target_name: productsubcategorykey
+          - unique_id: warehouse.source.productsubcategories.subcategoryname
+            target_name: subcategoryname
+      - unique_id: warehouse.source.productcategories
+        target_name: productcategories
+        data_extraction_config:
+          name: Full Extract
+          values: null
+        loading_option:
+          type: Truncate and insert
+        data_fields:
+          - unique_id: warehouse.source.productcategories.productcategorykey
+            target_name: productcategorykey
+          - unique_id: warehouse.source.productcategories.categoryname
+            target_name: categoryname
