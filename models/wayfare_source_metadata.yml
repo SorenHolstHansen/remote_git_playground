@@ -19,187 +19,142 @@
 
 version: 2
 sources:
-  - database: warehouse
-    name: pgsync
-    description: Sources from the pgsync sync
-    schema: target
+  - database: STAGING_PERSISTED
+    name: dummy_conn
+    description: Sources from the dummy_conn sync
+    schema: RAW
     loader: wayfare
     loaded_at_field: _wayfare_updated_at
     tables:
-      - name: productcategories
+      - name: BLNS_DATASET
         description: ""
         loaded_at_field: _wayfare_updated_at
         columns:
-          - name: categoryname
-          - name: productcategorykey
-          - name: _wayfare_created_at
+          - name: BLNS_COL
+          - name: _WAYFARE_CREATED_AT
             description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
+          - name: _WAYFARE_UPDATED_AT
             description: The transaction time at which the row was last updated by Wayfare
-      - name: products
+      - name: DATASET
         description: ""
         loaded_at_field: _wayfare_updated_at
         columns:
-          - name: modelname
-          - name: productcolor
-          - name: productcost
-          - name: productdescription
-          - name: productkey
-          - name: productname
-          - name: productprice
-          - name: productsize
-          - name: productsku
-          - name: productstyle
-          - name: productsubcategorykey
-          - name: _wayfare_created_at
+          - name: ANY
+          - name: ARRAY_ANY
+          - name: ARRAY_BOOLEAN
+          - name: ARRAY_BYTES
+          - name: ARRAY_DATE
+          - name: ARRAY_DATETIME_WITHOUT_TIMEZONE
+          - name: ARRAY_DATETIME_WITH_TIMEZONE
+          - name: ARRAY_DECIMAL
+          - name: ARRAY_DECIMAL_PRECISION
+          - name: ARRAY_DECIMAL_PRECISION_SCALE
+          - name: ARRAY_DECIMAL_SCALE
+          - name: ARRAY_FLOAT
+          - name: ARRAY_GEOGRAPHY
+          - name: ARRAY_GEOMETRY
+          - name: ARRAY_INTEGER_128
+          - name: ARRAY_INTEGER_16
+          - name: ARRAY_INTEGER_32
+          - name: ARRAY_INTEGER_4
+          - name: ARRAY_INTEGER_64
+          - name: ARRAY_INTEGER_8
+          - name: ARRAY_JSON
+          - name: ARRAY_MAP
+          - name: ARRAY_STRING
+          - name: ARRAY_STRING_ALLOWED_VALUES
+          - name: ARRAY_STRING_MAX_AND_MIN_LENGTH
+          - name: ARRAY_STRING_MAX_LENGTH
+          - name: ARRAY_STRING_MIN_LENGTH
+          - name: ARRAY_STRUCT_ALL
+          - name: ARRAY_STRUCT_SIMPLE
+          - name: ARRAY_TIME
+          - name: ARRAY_UINTEGER_128
+          - name: ARRAY_UINTEGER_16
+          - name: ARRAY_UINTEGER_32
+          - name: ARRAY_UINTEGER_4
+          - name: ARRAY_UINTEGER_64
+          - name: ARRAY_UINTEGER_8
+          - name: ARRAY_UNION
+          - name: ARRAY_XML
+          - name: BOOLEAN
+          - name: BYTES
+          - name: CASE_DATA_FIELD_NAME
+          - name: CASE_FULL_NAME
+          - name: CASE_VARIANT_NAME
+          - name: DATE
+          - name: DATETIME_WITHOUT_TIMEZONE
+          - name: DATETIME_WITH_TIMEZONE
+          - name: DECIMAL
+          - name: DECIMAL_HUGE_PRECISION
+          - name: DECIMAL_PRECISION
+          - name: DECIMAL_PRECISION_SCALE
+          - name: DECIMAL_SCALE
+          - name: FLOAT
+          - name: GEOGRAPHY
+          - name: GEOMETRY
+          - name: INTEGER_128
+          - name: INTEGER_16
+          - name: INTEGER_32
+          - name: INTEGER_4
+          - name: INTEGER_64
+          - name: INTEGER_8
+          - name: JSON
+          - name: MAP
+          - name: MAP_ANY
+          - name: MAP_HUGE_INT_KEY
+          - name: MAP_INT_KEY
+          - name: STRING
+          - name: STRING_ALLOWED_VALUES
+          - name: STRING_MAX_AND_MIN_LENGTH
+          - name: STRING_MAX_LENGTH
+          - name: STRING_MIN_LENGTH
+          - name: STRUCT_ALL
+          - name: STRUCT_NESTED
+          - name: STRUCT_SIMPLE
+          - name: TIME
+          - name: UINTEGER_128
+          - name: UINTEGER_16
+          - name: UINTEGER_32
+          - name: UINTEGER_4
+          - name: UINTEGER_64
+          - name: UINTEGER_8
+          - name: UNION_NESTED
+          - name: UNION_SIMPLE
+          - name: XML
+          - name: _WAYFARE_CREATED_AT
             description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
+          - name: _WAYFARE_UPDATED_AT
             description: The transaction time at which the row was last updated by Wayfare
-      - name: productsubcategories
+      - name: DATASET_WITH_DELETES
         description: ""
         loaded_at_field: _wayfare_updated_at
         columns:
-          - name: productcategorykey
-          - name: productsubcategorykey
-          - name: subcategoryname
-          - name: _wayfare_created_at
+          - name: ID
+          - name: VAL
+          - name: _WAYFARE_CREATED_AT
             description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
+          - name: _WAYFARE_DELETED
+            description: Whether the row is deleted or not
+          - name: _WAYFARE_UPDATED_AT
             description: The transaction time at which the row was last updated by Wayfare
-  - database: warehouse
-    name: test
-    description: Sources from the test sync
-    schema: target
-    loader: wayfare
-    loaded_at_field: _wayfare_updated_at
-    tables:
-      - name: blns_dataset
+      - name: DUMMY_CONTACTS
         description: ""
         loaded_at_field: _wayfare_updated_at
         columns:
-          - name: blns_col
-          - name: _wayfare_created_at
+          - name: COMPANY
+          - name: EMAIL
+          - name: NAME
+          - name: _WAYFARE_CREATED_AT
             description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
+          - name: _WAYFARE_UPDATED_AT
             description: The transaction time at which the row was last updated by Wayfare
-      - name: dataset
+      - name: DUMMY_SOURCE_DATASET
         description: ""
         loaded_at_field: _wayfare_updated_at
         columns:
-          - name: any
-          - name: array_any
-          - name: array_boolean
-          - name: array_bytes
-          - name: array_date
-          - name: array_datetime_with_timezone
-          - name: array_datetime_without_timezone
-          - name: array_decimal
-          - name: array_decimal_precision
-          - name: array_decimal_precision_scale
-          - name: array_decimal_scale
-          - name: array_float
-          - name: array_geography
-          - name: array_geometry
-          - name: array_integer_128
-          - name: array_integer_16
-          - name: array_integer_32
-          - name: array_integer_4
-          - name: array_integer_64
-          - name: array_integer_8
-          - name: array_json
-          - name: array_map
-          - name: array_string
-          - name: array_string_allowed_values
-          - name: array_string_max_and_min_length
-          - name: array_string_max_length
-          - name: array_string_min_length
-          - name: array_struct_all
-          - name: array_struct_simple
-          - name: array_time
-          - name: array_uinteger_128
-          - name: array_uinteger_16
-          - name: array_uinteger_32
-          - name: array_uinteger_4
-          - name: array_uinteger_64
-          - name: array_uinteger_8
-          - name: array_union
-          - name: array_xml
-          - name: boolean
-          - name: case_data_field_name
-          - name: case_full_name
-          - name: case_variant_name
-          - name: date
-          - name: datetime_with_timezone
-          - name: datetime_without_timezone
-          - name: decimal
-          - name: decimal_huge_precision
-          - name: decimal_precision
-          - name: decimal_precision_scale
-          - name: decimal_scale
-          - name: float
-          - name: geography
-          - name: geometry
-          - name: integer_128
-          - name: integer_16
-          - name: integer_32
-          - name: integer_4
-          - name: integer_64
-          - name: integer_8
-          - name: json
-          - name: json_object
-          - name: map
-          - name: map_any
-          - name: map_huge_int_key
-          - name: map_int_key
-          - name: string
-          - name: string_allowed_values
-          - name: string_max_and_min_length
-          - name: string_max_length
-          - name: string_min_length
-          - name: struct_all
-          - name: struct_nested
-          - name: struct_simple
-          - name: time
-          - name: uinteger_128
-          - name: uinteger_16
-          - name: uinteger_32
-          - name: uinteger_4
-          - name: uinteger_64
-          - name: uinteger_8
-          - name: union_nested
-          - name: union_simple
-          - name: xml
-          - name: _wayfare_created_at
+          - name: DUMMY_COL
+          - name: _WAYFARE_CREATED_AT
             description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-      - name: dataset_with_deletes
-        description: ""
-        loaded_at_field: _wayfare_updated_at
-        columns:
-          - name: id
-          - name: val
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-      - name: dummy_contacts
-        description: ""
-        loaded_at_field: _wayfare_updated_at
-        columns:
-          - name: company
-          - name: email
-          - name: name
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
-            description: The transaction time at which the row was last updated by Wayfare
-      - name: dummy_source_dataset
-        description: ""
-        loaded_at_field: _wayfare_updated_at
-        columns:
-          - name: dummy_col
-          - name: _wayfare_created_at
-            description: The transaction time at which the row was created by Wayfare
-          - name: _wayfare_updated_at
+          - name: _WAYFARE_UPDATED_AT
             description: The transaction time at which the row was last updated by Wayfare

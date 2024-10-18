@@ -14,3 +14,9 @@ models:
     columns:
       - name: id
         description: "The primary key for this table"
+
+  - name: aggregates
+    description: "Aggregates"
+    columns:
+      - name: TIS
+        description: "The primary key for this table"

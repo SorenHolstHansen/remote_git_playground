@@ -19,45 +19,1873 @@
 
 version: 2
 sources:
-  - database: warehouse
+  - database: STAGING_PERSISTED
     name: wayfare_unmanaged
     description: Unmanaged sources in the warehouse
-    schema: source
+    schema: MODELS
     tables:
-      - name: productcategories
+      - name: FCT_COST_BY_CATEGORY
         description: ""
         columns:
-          - name: categoryname
-          - name: productcategorykey
-      - name: products
+          - name: CATEGORY_NAME
+          - name: TOTAL_COST
+      - name: INT_MERGED_TABLES
         description: ""
         columns:
-          - name: modelname
-          - name: productcolor
-          - name: productcost
-          - name: productdescription
-          - name: productkey
-          - name: productname
-          - name: productprice
-          - name: productsize
-          - name: productsku
-          - name: productstyle
-          - name: productsubcategorykey
-      - name: productsubcategories
+          - name: CATEGORY_NAME
+          - name: PRODUCT_NAME
+          - name: PRODUCT_NUMBER
+          - name: STANDARD_COST
+          - name: SUBCATEGORY_NAME
+      - name: STG_PRODUCTS
         description: ""
         columns:
-          - name: productcategorykey
-          - name: productsubcategorykey
-          - name: subcategoryname
-  - database: warehouse
+          - name: LIST_PRICE
+          - name: MAKE_FLAG
+          - name: MODEL_NAME
+          - name: PRODUCT_ID
+          - name: PRODUCT_NAME
+          - name: PRODUCT_NUMBER
+          - name: STANDARD_COST
+          - name: SUB_CATEGORY_ID
+          - name: _WAYFARE_CREATED_AT
+          - name: _WAYFARE_UPDATED_AT
+      - name: STG_PRODUCT_CATEGORIES
+        description: ""
+        columns:
+          - name: CATEGORY_ID
+          - name: CATEGORY_NAME
+          - name: _WAYFARE_CREATED_AT
+          - name: _WAYFARE_UPDATED_AT
+      - name: STG_PRODUCT_SUBCATEGORIES
+        description: ""
+        columns:
+          - name: PRODUCT_CATEGORY_KEY
+          - name: PRODUCT_SUBCATEGORY_KEY
+          - name: SUBCATEGORY_NAME
+          - name: _WAYFARE_CREATED_AT
+          - name: _WAYFARE_UPDATED_AT
+  - database: STAGING_PERSISTED
     name: wayfare_unmanaged
     description: Unmanaged sources in the warehouse
-    schema: target
+    schema: RAW
     tables:
-      - name: aggregates
+      - name: AWS_S3_PRODUCTS
         description: ""
         columns:
-          - name: tis
-            tests:
-              - not_null
-          - name: total_cost
+          - name: LIST_PRICE
+            description: ""
+          - name: MAKE_FLAG
+            description: ""
+          - name: MODEL_NAME
+            description: ""
+          - name: PRODUCT_ID
+            description: ""
+          - name: PRODUCT_NAME
+            description: ""
+          - name: PRODUCT_NUMBER
+            description: ""
+          - name: STANDARD_COST
+            description: ""
+          - name: SUB_CATEGORY_ID
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_FILE_ROW_NUMBER
+            description: The row number from the source file
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: AWS_S3_PRODUCT_CATEGORIES
+        description: ""
+        columns:
+          - name: CATEGORY_ID
+            description: ""
+          - name: CATEGORY_NAME
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_FILE_ROW_NUMBER
+            description: The row number from the source file
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: AWS_S3_PRODUCT_SUBCATEGORIES
+        description: ""
+        columns:
+          - name: PRODUCT_CATEGORY_KEY
+            description: ""
+          - name: PRODUCT_SUBCATEGORY_KEY
+            description: ""
+          - name: SUBCATEGORY_NAME
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_FILE_ROW_NUMBER
+            description: The row number from the source file
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: HUBSPOT_COMPANIES
+        description: ""
+        columns:
+          - name: ARCHIVED
+            description: ""
+          - name: ARCHIVED_AT
+            description: ""
+          - name: ASSOCIATIONS
+            description: ""
+          - name: CREATED_AT
+            description: ""
+          - name: ID
+            description: ""
+          - name: PROPERTIES_ABOUT_US
+            description: Short about-company
+          - name: PROPERTIES_ADDRESS
+            description: "Street address of the company or organization, including unit
+              number. Powered by HubSpot Insights. "
+          - name: PROPERTIES_ADDRESS_2
+            description: "Additional address of the company or organization. Powered by
+              HubSpot Insights. "
+          - name: PROPERTIES_ANNUALREVENUE
+            description: "The actual or estimated annual revenue of the company. Powered by
+              HubSpot Insights. "
+          - name: PROPERTIES_CITY
+            description: City where the company is located. Powered by HubSpot Insights.
+          - name: PROPERTIES_CLOSEDATE
+            description: The date the company or organization was closed as a customer
+          - name: PROPERTIES_CLOSEDATE_TIMESTAMP_EARLIEST_VALUE_A_2_A_17_E_6_E
+            description: Calculation context property providing timestamp for rollup
+              property closedate calculated as EARLIEST_VALUE via values of
+              closedate on object type ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_COUNTRY
+            description: "Country in which the company or organization is located. Powered
+              by HubSpot Insights. "
+          - name: PROPERTIES_CREATEDATE
+            description: The date the company or organization was added to the database
+          - name: PROPERTIES_DAYS_TO_CLOSE
+            description: The number of days between when the company record was created and
+              when they closed as a customer.
+          - name: PROPERTIES_DESCRIPTION
+            description: "A short statement about the company's mission and goals. Powered
+              by HubSpot Insights. "
+          - name: PROPERTIES_DOMAIN
+            description: The domain name of the company or organization
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED
+            description: Last Meeting Booked for any contact associated with this
+              Company/Organization.
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED_CAMPAIGN
+            description: This UTM parameter shows which marketing campaign (e.g. a specific
+              email) referred an associated contact to the meetings tool for
+              their most recent booking. This property is only populated when
+              you add tracking parameters to your meeting link.
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED_MEDIUM
+            description: This UTM parameter shows which channel (e.g. email) referred an
+              associated contact to the meetings tool for their most recent
+              booking. This property is only populated when you add tracking
+              parameters to your meeting link.
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED_SOURCE
+            description: This UTM parameter shows which site (e.g. Twitter) referred an
+              associated contact to the meetings tool for their most recent
+              booking. This property is only populated when you add tracking
+              parameters to your meeting link.
+          - name: PROPERTIES_FACEBOOKFANS
+            description: Number of facebook fans
+          - name: PROPERTIES_FACEBOOK_COMPANY_PAGE
+            description: The URL of the Facebook company page for the company or
+              organization
+          - name: PROPERTIES_FIRST_CONTACT_CREATEDATE
+            description: The date that the first contact from this company entered the
+              system, which could pre-date the company's create date
+          - name: PROPERTIES_FIRST_CONTACT_CREATEDATE_TIMESTAMP_EARLIEST_VALUE_78_B_50_EEA
+            description: Calculation context property providing timestamp for rollup
+              property first_contact_createdate calculated as EARLIEST_VALUE via
+              values of createdate on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_FIRST_CONVERSION_DATE
+            description: The first conversion date across all contacts associated this
+              company or organization
+          - name: PROPERTIES_FIRST_CONVERSION_DATE_TIMESTAMP_EARLIEST_VALUE_61_F_58_F_2_C
+            description: Calculation context property providing timestamp for rollup
+              property first_conversion_date calculated as EARLIEST_VALUE via
+              values of first_conversion_date on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_FIRST_CONVERSION_EVENT_NAME
+            description: The first form submitted across all contacts associated this
+              company or organization
+          - name: PROPERTIES_FIRST_CONVERSION_EVENT_NAME_TIMESTAMP_EARLIEST_VALUE_68_DDAE_0_A
+            description: Calculation context property providing timestamp for rollup
+              property first_conversion_event_name calculated as EARLIEST_VALUE
+              via values of first_conversion_event_name on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_FIRST_DEAL_CREATED_DATE
+            description: Date the first deal was associated with this company record.
+          - name: PROPERTIES_FOUNDED_YEAR
+            description: "The year the company was created. Powered by HubSpot Insights. "
+          - name: PROPERTIES_GOOGLEPLUS_PAGE
+            description: The URL of the Google Plus page for the company or organization
+          - name: PROPERTIES_HS_ADDITIONAL_DOMAINS
+            description: Additional domains belonging to this company
+          - name: PROPERTIES_HS_ALL_ACCESSIBLE_TEAM_IDS
+            description: The team IDs, including the team hierarchy, of all default and
+              custom owner properties for this record.
+          - name: PROPERTIES_HS_ALL_ASSIGNED_BUSINESS_UNIT_IDS
+            description: The business units this record is assigned to.
+          - name: PROPERTIES_HS_ALL_OWNER_IDS
+            description: Values of all default and custom owner properties for this record.
+          - name: PROPERTIES_HS_ALL_TEAM_IDS
+            description: The team IDs of all default and custom owner properties for this
+              record.
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_TIMESTAMP
+            description: The first activity for any contact associated with this company or
+              organization
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_TIMESTAMP_TIMESTAMP_EARLIEST_VALUE_11_E_3_A_63_A
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_first_timestamp calculated as EARLIEST_VALUE
+              via values of hs_analytics_first_timestamp on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_TOUCH_CONVERTING_CAMPAIGN
+            description: The campaign responsible for the first touch creation of the first
+              contact associated with this company
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_TOUCH_CONVERTING_CAMPAIGN_TIMESTAMP_EARLIEST_VALUE_4757_FE_10
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_first_touch_converting_campaign calculated
+              as EARLIEST_VALUE via values of
+              hs_analytics_first_touch_converting_campaign on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_VISIT_TIMESTAMP
+            description: Time of first session across all contacts associated with this
+              company or organization
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_VISIT_TIMESTAMP_TIMESTAMP_EARLIEST_VALUE_ACCC_17_AE
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_first_visit_timestamp calculated as
+              EARLIEST_VALUE via values of hs_analytics_first_visit_timestamp on
+              object type ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_LAST_TIMESTAMP
+            description: Time last seen across all contacts associated with this company or
+              organization
+          - name: PROPERTIES_HS_ANALYTICS_LAST_TIMESTAMP_TIMESTAMP_LATEST_VALUE_4_E_16365_A
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_last_timestamp calculated as LATEST_VALUE
+              via values of hs_analytics_last_timestamp on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_LAST_TOUCH_CONVERTING_CAMPAIGN
+            description: The campaign responsible for the last touch creation of the first
+              contact associated with this company
+          - name: PROPERTIES_HS_ANALYTICS_LAST_TOUCH_CONVERTING_CAMPAIGN_TIMESTAMP_LATEST_VALUE_81_A_64_E_30
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_last_touch_converting_campaign calculated as
+              LATEST_VALUE via values of
+              hs_analytics_last_touch_converting_campaign on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_LAST_VISIT_TIMESTAMP
+            description: Time of the last session attributed to any contacts that are
+              associated with this company record.
+          - name: PROPERTIES_HS_ANALYTICS_LAST_VISIT_TIMESTAMP_TIMESTAMP_LATEST_VALUE_999_A_0_FCE
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_last_visit_timestamp calculated as
+              LATEST_VALUE via values of hs_analytics_last_visit_timestamp on
+              object type ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_LATEST_SOURCE
+            description: Source of the last session attributed to any contacts that are
+              associated with this company
+          - name: PROPERTIES_HS_ANALYTICS_LATEST_SOURCE_DATA_1
+            description: Additional source details of the last session attributed to any
+              contacts that are associated with this company
+          - name: PROPERTIES_HS_ANALYTICS_LATEST_SOURCE_DATA_2
+            description: Additional source details of the last session attributed to any
+              contacts that are associated with this company
+          - name: PROPERTIES_HS_ANALYTICS_LATEST_SOURCE_TIMESTAMP
+            description: Timestamp of when latest source occurred
+          - name: PROPERTIES_HS_ANALYTICS_NUM_PAGE_VIEWS
+            description: Total number of page views across all contacts associated with this
+              company or organization
+          - name: PROPERTIES_HS_ANALYTICS_NUM_PAGE_VIEWS_CARDINALITY_SUM_E_46_E_85_B_0
+            description: Calculation context property providing cardinality for rollup
+              property hs_analytics_num_page_views calculated as SUM via values
+              of hs_analytics_num_page_views on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_NUM_VISITS
+            description: Total number of sessions across all contacts associated with this
+              company or organization
+          - name: PROPERTIES_HS_ANALYTICS_NUM_VISITS_CARDINALITY_SUM_53_D_952_A_6
+            description: Calculation context property providing cardinality for rollup
+              property hs_analytics_num_visits calculated as SUM via values of
+              hs_analytics_num_visits on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE
+            description: Original source for the contact with the earliest activity for this
+              company or organization
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_DATA_1
+            description: Additional information about the original source for the contact
+              with the earliest activity for this company or organization
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_DATA_1_TIMESTAMP_EARLIEST_VALUE_9_B_2_F_1_FA_1
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_source_data_1 calculated as EARLIEST_VALUE
+              via values of hs_analytics_source_data_1 on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_DATA_2
+            description: Additional information about the original source for the contact
+              with the earliest activity for this company or organization
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_DATA_2_TIMESTAMP_EARLIEST_VALUE_9_B_2_F_9400
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_source_data_2 calculated as EARLIEST_VALUE
+              via values of hs_analytics_source_data_2 on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_TIMESTAMP_EARLIEST_VALUE_25_A_3_A_52_C
+            description: Calculation context property providing timestamp for rollup
+              property hs_analytics_source calculated as EARLIEST_VALUE via
+              values of hs_analytics_source on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_ANNUAL_REVENUE_CURRENCY_CODE
+            description: The currency code associated with the annual revenue amount
+          - name: PROPERTIES_HS_AVATAR_FILEMANAGER_KEY
+            description: The path in the FileManager CDN for this company's avatar override
+              image. Automatically set by HubSpot.
+          - name: PROPERTIES_HS_COUNTRY_CODE
+            description: Two-letter country code for the company headquarters location.
+          - name: PROPERTIES_HS_CREATEDATE
+            description: The date and time at which this object was created. This value is
+              automatically set by HubSpot and may not be modified.
+          - name: PROPERTIES_HS_CREATED_BY_USER_ID
+            description: The user who created this record. This value is set automatically
+              by HubSpot.
+          - name: PROPERTIES_HS_CSM_SENTIMENT
+            description: This property stores a CSM's sentiment towards a company.
+          - name: PROPERTIES_HS_CUSTOMER_SUCCESS_TICKET_SENTIMENT
+            description: Aggregated sentiment of any tickets opened in the last 7 days and
+              all currently open tickets associated with the company
+          - name: PROPERTIES_HS_DATE_ENTERED_CUSTOMER
+            description: The date and time when the company entered the 'Customer' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_EVANGELIST
+            description: The date and time when the company entered the 'Evangelist' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_LEAD
+            description: The date and time when the company entered the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_MARKETINGQUALIFIEDLEAD
+            description: The date and time when the company entered the 'Marketing Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_OPPORTUNITY
+            description: The date and time when the company entered the 'Opportunity' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_OTHER
+            description: The date and time when the company entered the 'Other' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_SALESQUALIFIEDLEAD
+            description: The date and time when the company entered the 'Sales Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_SUBSCRIBER
+            description: The date and time when the company entered the 'Subscriber' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_CUSTOMER
+            description: The date and time when the company exited the 'Customer' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_EVANGELIST
+            description: The date and time when the company exited the 'Evangelist' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_LEAD
+            description: The date and time when the company exited the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_MARKETINGQUALIFIEDLEAD
+            description: The date and time when the company exited the 'Marketing Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_OPPORTUNITY
+            description: The date and time when the company exited the 'Opportunity' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_OTHER
+            description: The date and time when the company exited the 'Other' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_SALESQUALIFIEDLEAD
+            description: The date and time when the company exited the 'Sales Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_SUBSCRIBER
+            description: The date and time when the company exited the 'Subscriber' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_EMPLOYEE_RANGE
+            description: Numeric range of company's employees. Useful for segmenting
+              companies by size.
+          - name: PROPERTIES_HS_IDEAL_CUSTOMER_PROFILE
+            description: How well this company matches your Ideal Customer Profile. Tier 1
+              means a great fit for your products/services, Tier 3 might be
+              acceptable, but low priority.
+          - name: PROPERTIES_HS_INDUSTRY_GROUP
+            description: Second tier of company industry classification.
+          - name: PROPERTIES_HS_IS_TARGET_ACCOUNT
+            description: Identifies whether this company is being marketed and sold to as
+              part of your account-based strategy.
+          - name: PROPERTIES_HS_LASTMODIFIEDDATE
+            description: Most recent timestamp of any property update for this company. This
+              includes HubSpot internal properties, which can be visible or
+              hidden. This property is updated automatically.
+          - name: PROPERTIES_HS_LAST_BOOKED_MEETING_DATE
+            description: The last date of booked meetings associated with the company
+          - name: PROPERTIES_HS_LAST_LOGGED_CALL_DATE
+            description: The last date of logged calls associated with the company
+          - name: PROPERTIES_HS_LAST_OPEN_TASK_DATE
+            description: The last due date of open tasks associated with the company
+          - name: PROPERTIES_HS_LAST_SALES_ACTIVITY_DATE
+            description: The date of the last sales activity with the company in seconds.
+          - name: PROPERTIES_HS_LAST_SALES_ACTIVITY_TIMESTAMP
+            description: The last time a contact engaged with your site or a form, document,
+              meetings link, or tracked email. This doesn't include marketing
+              emails or emails to multiple contacts.
+          - name: PROPERTIES_HS_LAST_SALES_ACTIVITY_TYPE
+            description: The type of the last engagement a company performed. This doesn't
+              include marketing emails or emails to multiple contacts.
+          - name: PROPERTIES_HS_LATEST_CREATEDATE_OF_ACTIVE_SUBSCRIPTIONS
+            description: Latest created date of all associated active Subscriptions
+          - name: PROPERTIES_HS_LATEST_MEETING_ACTIVITY
+            description: The date of the most recent meeting (past or upcoming) logged for,
+              scheduled with, or booked by a contact associated with this
+              company.
+          - name: PROPERTIES_HS_LEAD_STATUS
+            description: The company's sales, prospecting or outreach status
+          - name: PROPERTIES_HS_LINKEDIN_HANDLE
+            description: Company's LinkedIn page handle
+          - name: PROPERTIES_HS_MERGED_OBJECT_IDS
+            description: The list of Company record IDs that have been merged into this
+              Company. This value is set automatically by HubSpot.
+          - name: PROPERTIES_HS_NOTES_LAST_ACTIVITY
+            description: The coordinates of the last activity for a company. This is set
+              automatically by HubSpot based on user actions in the company
+              record.
+          - name: PROPERTIES_HS_NOTES_NEXT_ACTIVITY
+            description: The coordinates of the next upcoming activity for a company. This
+              is set automatically by HubSpot based on user actions in the
+              company record.
+          - name: PROPERTIES_HS_NOTES_NEXT_ACTIVITY_TYPE
+            description: The type of the next upcoming scheduled sales activity for this
+              company record.
+          - name: PROPERTIES_HS_NUM_BLOCKERS
+            description: The number of contacts associated with this company with the role
+              of blocker.
+          - name: PROPERTIES_HS_NUM_CHILD_COMPANIES
+            description: The number of child companies of this company
+          - name: PROPERTIES_HS_NUM_CONTACTS_WITH_BUYING_ROLES
+            description: The number of contacts associated with this company with a buying
+              role.
+          - name: PROPERTIES_HS_NUM_DECISION_MAKERS
+            description: The number of contacts associated with this company with the role
+              of decision maker.
+          - name: PROPERTIES_HS_NUM_OPEN_DEALS
+            description: The number of open deals associated with this company.
+          - name: PROPERTIES_HS_OBJECT_ID
+            description: The unique ID for this record. This value is set automatically by
+              HubSpot.
+          - name: PROPERTIES_HS_OBJECT_SOURCE
+            description: Raw internal PropertySource present in the RequestMeta when this
+              record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_DETAIL_1
+            description: First level of detail on how this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_DETAIL_2
+            description: Second level of detail on how this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_DETAIL_3
+            description: Third level of detail on how this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_ID
+            description: Raw internal sourceId present in the RequestMeta when this record
+              was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_LABEL
+            description: How this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_USER_ID
+            description: Raw internal userId present in the RequestMeta when this record was
+              created.
+          - name: PROPERTIES_HS_PARENT_COMPANY_ID
+            description: The parent company of this company
+          - name: PROPERTIES_HS_PINNED_ENGAGEMENT_ID
+            description: The object ID of the current pinned engagement. This will only be
+              shown if there is already an association to the engagement.
+          - name: PROPERTIES_HS_PIPELINE
+            description: The pipeline with which this company is currently associated
+          - name: PROPERTIES_HS_PREDICTIVECONTACTSCORE_V_2
+            description: The highest probability that a contact associated with this company
+              will become a customer within the next 90 days. This score is
+              based on standard contact properties and behavior.
+          - name: PROPERTIES_HS_PREDICTIVECONTACTSCORE_V_2_NEXT_MAX_MAX_D_4_E_58_C_1_E
+            description: Calculation context property providing next_max for rollup property
+              hs_predictivecontactscore_v2 calculated as MAX via values of
+              hs_predictivecontactscore_v2 on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_HS_QUICK_CONTEXT
+            description: ""
+          - name: PROPERTIES_HS_READ_ONLY
+            description: Determines whether a record can be edited by a user.
+          - name: PROPERTIES_HS_REVENUE_RANGE
+            description: Numeric estimate of the company’s annual revenue by range.
+          - name: PROPERTIES_HS_SALES_EMAIL_LAST_REPLIED
+            description: The last time a tracked sales email was replied to by this company
+          - name: PROPERTIES_HS_SHARED_TEAM_IDS
+            description: Additional teams whose users can access the Company based on their
+              permissions. This can be set manually or through Workflows or
+              APIs.
+          - name: PROPERTIES_HS_SHARED_USER_IDS
+            description: Additional users that can access the Company based on their
+              permissions. This can be set manually or through Workflows and
+              APIs.
+          - name: PROPERTIES_HS_SOURCE_OBJECT_ID
+            description: The ID of the object from which the data was migrated. This is set
+              automatically during portal data migration.
+          - name: PROPERTIES_HS_TARGET_ACCOUNT
+            description: The Target Account property is a means to flag high priority
+              companies if you are following an account based strategy
+          - name: PROPERTIES_HS_TARGET_ACCOUNT_PROBABILITY
+            description: The probability a company is marked as a target account
+          - name: PROPERTIES_HS_TARGET_ACCOUNT_RECOMMENDATION_SNOOZE_TIME
+            description: The date when the target account recommendation is snoozed.
+          - name: PROPERTIES_HS_TARGET_ACCOUNT_RECOMMENDATION_STATE
+            description: The state of the target account recommendation
+          - name: PROPERTIES_HS_TIME_IN_CUSTOMER
+            description: The total time in seconds spent by the company in the 'Customer'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_EVANGELIST
+            description: The total time in seconds spent by the company in the 'Evangelist'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_LEAD
+            description: The total time in seconds spent by the company in the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_MARKETINGQUALIFIEDLEAD
+            description: The total time in seconds spent by the company in the 'Marketing
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_OPPORTUNITY
+            description: The total time in seconds spent by the company in the 'Opportunity'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_OTHER
+            description: The total time in seconds spent by the company in the 'Other'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_SALESQUALIFIEDLEAD
+            description: The total time in seconds spent by the company in the 'Sales
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_SUBSCRIBER
+            description: The total time in seconds spent by the company in the 'Subscriber'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TOTAL_DEAL_VALUE
+            description: The total value, in your company's currency, of all open deals
+              associated with this company
+          - name: PROPERTIES_HS_UNIQUE_CREATION_KEY
+            description: Unique property used for idempotent creates
+          - name: PROPERTIES_HS_UPDATED_BY_USER_ID
+            description: The user who last updated this record. This value is set
+              automatically by HubSpot.
+          - name: PROPERTIES_HS_USER_IDS_OF_ALL_NOTIFICATION_FOLLOWERS
+            description: The user IDs of all users that have clicked follow within the
+              object to opt-in to getting follow notifications
+          - name: PROPERTIES_HS_USER_IDS_OF_ALL_NOTIFICATION_UNFOLLOWERS
+            description: The user IDs of all object owners that have clicked unfollow within
+              the object to opt-out of getting follow notifications
+          - name: PROPERTIES_HS_USER_IDS_OF_ALL_OWNERS
+            description: The user IDs of all owners of this record.
+          - name: PROPERTIES_HS_WAS_IMPORTED
+            description: Object is part of an import
+          - name: PROPERTIES_HUBSPOTSCORE
+            description: The sales and marketing score for the company or organization
+          - name: PROPERTIES_HUBSPOT_OWNER_ASSIGNEDDATE
+            description: The most recent timestamp of when an owner was assigned to this
+              record. This value is set automatically by HubSpot.
+          - name: PROPERTIES_HUBSPOT_OWNER_ID
+            description: The owner of the company
+          - name: PROPERTIES_HUBSPOT_TEAM_ID
+            description: The team of the owner of the company.
+          - name: PROPERTIES_INDUSTRY
+            description: The type of business the company performs. By default, this
+              property has approximately 150 pre-defined options to select from.
+              While these options cannot be deleted, you can add new custom
+              options to meet your needs.
+          - name: PROPERTIES_IS_PUBLIC
+            description: Indicates if the company is publicly traded. Powered by HubSpot
+              Insights.
+          - name: PROPERTIES_LIFECYCLESTAGE
+            description: The qualification of companies to sales readiness throughout the
+              buying journey
+          - name: PROPERTIES_LINKEDINBIO
+            description: The LinkedIn bio for the company or organization
+          - name: PROPERTIES_LINKEDIN_COMPANY_PAGE
+            description: The URL of the LinkedIn company page for the company or
+              organization
+          - name: PROPERTIES_NAME
+            description: "The name of the company or organization. Powered by HubSpot
+              Insights. "
+          - name: PROPERTIES_NOTES_LAST_CONTACTED
+            description: The last time a call, chat conversation, LinkedIn message, postal
+              mail, meeting, sales email, SMS, or WhatsApp message was logged
+              for a company. This is set automatically by HubSpot based on user
+              actions in the company record.
+          - name: PROPERTIES_NOTES_LAST_UPDATED
+            description: The last time a call, chat conversation, LinkedIn message, postal
+              mail, meeting, note, sales email, SMS, or WhatsApp message was
+              logged for a company. This is set automatically by HubSpot based
+              on user actions in the company record.
+          - name: PROPERTIES_NOTES_NEXT_ACTIVITY_DATE
+            description: Date of the next upcoming scheduled sales activity for this company
+              record.
+          - name: PROPERTIES_NUMBEROFEMPLOYEES
+            description: "The total number of employees who work for the company or
+              organization. Powered by HubSpot Insights. "
+          - name: PROPERTIES_NUM_ASSOCIATED_CONTACTS
+            description: The number of contacts associated with this company
+          - name: PROPERTIES_NUM_ASSOCIATED_DEALS
+            description: The number of deals associated with this company
+          - name: PROPERTIES_NUM_CONTACTED_NOTES
+            description: The number of times a call, chat conversation, LinkedIn message,
+              postal mail, meeting, sales email, SMS, or WhatsApp message was
+              logged for a company record. This is set automatically by HubSpot
+              based on user actions in the company record.
+          - name: PROPERTIES_NUM_CONVERSION_EVENTS
+            description: The number of form submissions for all contacts which have this
+              company as their Primary company.
+          - name: PROPERTIES_NUM_CONVERSION_EVENTS_CARDINALITY_SUM_D_095_F_14_B
+            description: Calculation context property providing cardinality for rollup
+              property num_conversion_events calculated as SUM via values of
+              num_conversion_events on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_NUM_NOTES
+            description: The number of times a call, chat conversation, LinkedIn message,
+              postal mail, meeting, note, sales email, SMS, task, or WhatsApp
+              message was logged for a company record. This is set automatically
+              by HubSpot based on user actions in the company record.
+          - name: PROPERTIES_OWNEREMAIL
+            description: HubSpot owner email for this company or organization
+          - name: PROPERTIES_OWNERNAME
+            description: HubSpot owner name for this company or organization
+          - name: PROPERTIES_PHONE
+            description: Company primary phone number. Powered by HubSpot Insights.
+          - name: PROPERTIES_RECENT_CONVERSION_DATE
+            description: The most recent conversion date across all contacts associated this
+              company or organization
+          - name: PROPERTIES_RECENT_CONVERSION_DATE_TIMESTAMP_LATEST_VALUE_72856_DA_1
+            description: Calculation context property providing timestamp for rollup
+              property recent_conversion_date calculated as LATEST_VALUE via
+              values of recent_conversion_date on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_RECENT_CONVERSION_EVENT_NAME
+            description: The last form submitted across all contacts associated this company
+              or organization
+          - name: PROPERTIES_RECENT_CONVERSION_EVENT_NAME_TIMESTAMP_LATEST_VALUE_66_C_820_BF
+            description: Calculation context property providing timestamp for rollup
+              property recent_conversion_event_name calculated as LATEST_VALUE
+              via values of recent_conversion_event_name on object type
+              ObjectTypeId{legacyObjectType=CONTACT}
+          - name: PROPERTIES_RECENT_DEAL_AMOUNT
+            description: Amount of last closed won deal associated with this company. Set
+              automatically.
+          - name: PROPERTIES_RECENT_DEAL_CLOSE_DATE
+            description: Date of the last "closed won" deal associated with this company
+              record.
+          - name: PROPERTIES_STATE
+            description: "State or region in which the company or organization is located.
+              Powered by HubSpot Insights. "
+          - name: PROPERTIES_TIMEZONE
+            description: "Time zone where the company or organization is located. Powered by
+              HubSpot Insights. "
+          - name: PROPERTIES_TOTAL_MONEY_RAISED
+            description: "The total amount of money raised by the company. Powered by
+              HubSpot Insights. "
+          - name: PROPERTIES_TOTAL_REVENUE
+            description: The total amount of closed won deals
+          - name: PROPERTIES_TWITTERBIO
+            description: The Twitter bio of the company or organization
+          - name: PROPERTIES_TWITTERFOLLOWERS
+            description: The number of Twitter followers of the company or organization
+          - name: PROPERTIES_TWITTERHANDLE
+            description: The main twitter account of the company or organization
+          - name: PROPERTIES_TYPE
+            description: "The optional classification of this company record - prospect,
+              partner, etc. "
+          - name: PROPERTIES_WEBSITE
+            description: "The main website of the company or organization. This property is
+              used to identify unique companies. Powered by HubSpot Insights. "
+          - name: PROPERTIES_WEB_TECHNOLOGIES
+            description: The web technologies used by the company or organization.
+          - name: PROPERTIES_ZIP
+            description: Postal or zip code of the company or organization. Powered by
+              HubSpot Insights.
+          - name: UPDATED_AT
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: HUBSPOT_CONTACTS
+        description: ""
+        columns:
+          - name: ARCHIVED
+            description: ""
+          - name: ARCHIVED_AT
+            description: ""
+          - name: ASSOCIATIONS
+            description: ""
+          - name: CREATED_AT
+            description: ""
+          - name: ID
+            description: ""
+          - name: PROPERTIES_ADDRESS
+            description: Contact's street address, including apartment or unit number.
+          - name: PROPERTIES_ANNUALREVENUE
+            description: Annual company revenue
+          - name: PROPERTIES_ASSOCIATEDCOMPANYID
+            description: HubSpot defined ID of a contact's primary associated company in
+              HubSpot.
+          - name: PROPERTIES_ASSOCIATEDCOMPANYLASTUPDATED
+            description: This field is meaningless on its own, and is solely used for
+              triggering dynamic list updates when a company is updated
+          - name: PROPERTIES_CITY
+            description: A contact's city of residence
+          - name: PROPERTIES_CLAIMS_CREATED
+            description: Number of Claims created in Veeva Vault
+          - name: PROPERTIES_CLOSEDATE
+            description: Date the  contact  became  a  customer. Set automatically when a
+              deal or opportunity is marked as closed-won. It can also be set
+              manually or programmatically.
+          - name: PROPERTIES_COMPANY
+            description: Name of the contact's company. This can be set independently from
+              the name property on the contact's associated company.
+          - name: PROPERTIES_COMPANY_SIZE
+            description: Contact's company size. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_COUNTRY
+            description: The contact's country/region of residence. This might be set via
+              import, form, or integration.
+          - name: PROPERTIES_CREATEDATE
+            description: The date that a contact entered the system
+          - name: PROPERTIES_CURRENTLYINWORKFLOW
+            description: True when contact is enrolled in a workflow.
+          - name: PROPERTIES_DATE_OF_BIRTH
+            description: Contact's date of birth. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_DAYS_TO_CLOSE
+            description: Count of days elapsed between creation and being closed as a
+              customer. Set automatically.
+          - name: PROPERTIES_DEGREE
+            description: Contact's degree. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_EMAIL
+            description: A contact's email address
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED
+            description: The date of the last meeting that has been scheduled by a contact
+              through the meetings tool. If multiple meetings have been
+              scheduled, the date of the last chronological meeting in the
+              timeline is shown.
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED_CAMPAIGN
+            description: UTM parameter for marketing campaign (e.g. a specific email)
+              responsible for recent meeting booking. Only populated when
+              tracking parameters are included in meeting link.
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED_MEDIUM
+            description: UTM parameter for the channel (e.g. email)  responsible for most
+              recent meeting booking. Only populated when tracking parameters
+              are included in meeting link.
+          - name: PROPERTIES_ENGAGEMENTS_LAST_MEETING_BOOKED_SOURCE
+            description: UTM parameter for the site (e.g. Twitter) responsible for most
+              recent meeting booking. Only populated when tracking parameters
+              are included in meeting link.
+          - name: PROPERTIES_FAX
+            description: A contact's primary fax number
+          - name: PROPERTIES_FIELD_OF_STUDY
+            description: Contact's field of study. Required for the Facebook Ads
+              Integration. Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_FIRSTNAME
+            description: A contact's first name
+          - name: PROPERTIES_FIRST_CONVERSION_DATE
+            description: Date  this  contact  first  submitted  a  form.
+          - name: PROPERTIES_FIRST_CONVERSION_EVENT_NAME
+            description: First form this contact submitted.
+          - name: PROPERTIES_FIRST_DEAL_CREATED_DATE
+            description: Date first deal was created for contact. Set automatically.
+          - name: PROPERTIES_FOLLOWERCOUNT
+            description: The number of Twitter followers a contact has
+          - name: PROPERTIES_GENDER
+            description: Contact's gender. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_GRADUATION_DATE
+            description: Contact's graduation date. Required for the Facebook Ads
+              Integration. Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_HS_ADDITIONAL_EMAILS
+            description: A set of additional email addresses for a contact
+          - name: PROPERTIES_HS_ALL_ACCESSIBLE_TEAM_IDS
+            description: The team IDs, including the team hierarchy, of all default and
+              custom owner properties for this record.
+          - name: PROPERTIES_HS_ALL_ASSIGNED_BUSINESS_UNIT_IDS
+            description: The business units this record is assigned to.
+          - name: PROPERTIES_HS_ALL_CONTACT_VIDS
+            description: A set of all vids, canonical or otherwise, for a contact
+          - name: PROPERTIES_HS_ALL_OWNER_IDS
+            description: Values of all default and custom owner properties for this record.
+          - name: PROPERTIES_HS_ALL_TEAM_IDS
+            description: The team IDs of all default and custom owner properties for this
+              record.
+          - name: PROPERTIES_HS_ANALYTICS_AVERAGE_PAGE_VIEWS
+            description: Average number of pageviews per session for this contact. Set
+              automatically.
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_REFERRER
+            description: URL that referred the contact to your website. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_TIMESTAMP
+            description: First time the contact has been seen. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_TOUCH_CONVERTING_CAMPAIGN
+            description: Campaign responsible for the first touch creation of this contact.
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_URL
+            description: First page the contact visited on your website. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_FIRST_VISIT_TIMESTAMP
+            description: First time the contact visited your website. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_LAST_REFERRER
+            description: Last URL that referred contact to your website. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_LAST_TIMESTAMP
+            description: Timestamp for most recent webpage view on your website.
+          - name: PROPERTIES_HS_ANALYTICS_LAST_TOUCH_CONVERTING_CAMPAIGN
+            description: Campaign responsible for the last touch creation of this contact.
+          - name: PROPERTIES_HS_ANALYTICS_LAST_URL
+            description: Last page the contact visited on your website. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_LAST_VISIT_TIMESTAMP
+            description: Timestamp for start of the most recent session for this contact to
+              your website.
+          - name: PROPERTIES_HS_ANALYTICS_NUM_EVENT_COMPLETIONS
+            description: Total number of events for this contact. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_NUM_PAGE_VIEWS
+            description: Total number of page views this contact has had on your website.
+              Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_NUM_VISITS
+            description: Number of times a contact has come to your website. Set
+              automatically.
+          - name: PROPERTIES_HS_ANALYTICS_REVENUE
+            description: Set event revenue on a contact though the Enterprise Events
+              feature.
+              http://help.hubspot.com/articles/KCS_Article/Reports/How-do-I-create-Events-in-HubSpot
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE
+            description: First known source the contact used to find your website. Set
+              automatically, but may be updated manually.
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_DATA_1
+            description: Additional information about the source the contact used to find
+              your website. Set automatically.
+          - name: PROPERTIES_HS_ANALYTICS_SOURCE_DATA_2
+            description: Additional information about the source the contact used to find
+              your website. Set automatically.
+          - name: PROPERTIES_HS_AVATAR_FILEMANAGER_KEY
+            description: The path in the FileManager CDN for this contact's avatar override
+              image. Automatically set by HubSpot.
+          - name: PROPERTIES_HS_BUYING_ROLE
+            description: Role the contact plays during the sales process. Contacts can have
+              multiple roles, and can share roles with others.
+          - name: PROPERTIES_HS_CALCULATED_FORM_SUBMISSIONS
+            description: A set of all form submissions for a contact
+          - name: PROPERTIES_HS_CALCULATED_MERGED_VIDS
+            description: Merged vids with timestamps of a contact
+          - name: PROPERTIES_HS_CALCULATED_MOBILE_NUMBER
+            description: Mobile number in international format
+          - name: PROPERTIES_HS_CALCULATED_PHONE_NUMBER
+            description: Phone number in international format
+          - name: PROPERTIES_HS_CALCULATED_PHONE_NUMBER_AREA_CODE
+            description: Area Code of the calculated phone number
+          - name: PROPERTIES_HS_CALCULATED_PHONE_NUMBER_COUNTRY_CODE
+            description: Country code of the calculated phone number
+          - name: PROPERTIES_HS_CALCULATED_PHONE_NUMBER_REGION_CODE
+            description: ISO2 Country code for the derived phone number
+          - name: PROPERTIES_HS_CLICKED_LINKEDIN_AD
+            description: Whether contact has clicked on a LinkedIn Ad
+          - name: PROPERTIES_HS_CONTACT_ENRICHMENT_OPT_OUT
+            description: ""
+          - name: PROPERTIES_HS_CONTACT_ENRICHMENT_OPT_OUT_TIMESTAMP
+            description: Timestamp of when the contact opted out of being included in the
+              HubSpot Enrichment database
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_EMAIL
+            description: Email used to send private content information to members
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_EMAIL_CONFIRMED
+            description: Email Confirmation status of user of Content Membership
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_FOLLOW_UP_ENQUEUED_AT
+            description: The time when the contact was first enrolled in the registration
+              follow up email flow
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_NOTES
+            description: Notes relating to the contact's content membership.
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_REGISTERED_AT
+            description: Datetime at which this user was set up for Content Membership
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_REGISTRATION_DOMAIN_SENT_TO
+            description: Domain to which the registration invitation email for Content
+              Membership was sent to
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_REGISTRATION_EMAIL_SENT_AT
+            description: Datetime at which this user was sent a registration invitation
+              email for Content Membership
+          - name: PROPERTIES_HS_CONTENT_MEMBERSHIP_STATUS
+            description: Status of the contact's content membership.
+          - name: PROPERTIES_HS_CONVERSATIONS_VISITOR_EMAIL
+            description: A Conversations visitor's email address
+          - name: PROPERTIES_HS_COUNT_IS_UNWORKED
+            description: if contact is assigned and unworked, set to 1. if contact is
+              assigned and worked, set to 0.
+          - name: PROPERTIES_HS_COUNT_IS_WORKED
+            description: if contact is assigned and worked, set to 1. if contact is assigned
+              and unworked, set to 0.
+          - name: PROPERTIES_HS_CREATEDATE
+            description: The date and time at which this object was created. This value is
+              automatically set by HubSpot and may not be modified.
+          - name: PROPERTIES_HS_CREATED_BY_CONVERSATIONS
+            description: Flag indicating this contact was created by the Conversations API
+          - name: PROPERTIES_HS_CREATED_BY_USER_ID
+            description: The user who created this record. This value is set automatically
+              by HubSpot.
+          - name: PROPERTIES_HS_DATA_PRIVACY_ADS_CONSENT
+            description: This property captures ads consents from forms and is used by
+              consentmanager to create / update associated data privacy consent
+              objects
+          - name: PROPERTIES_HS_DATE_ENTERED_CUSTOMER
+            description: The date and time when the contact entered the 'Customer' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_EVANGELIST
+            description: The date and time when the contact entered the 'Evangelist' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_LEAD
+            description: The date and time when the contact entered the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_MARKETINGQUALIFIEDLEAD
+            description: The date and time when the contact entered the 'Marketing Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_OPPORTUNITY
+            description: The date and time when the contact entered the 'Opportunity' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_OTHER
+            description: The date and time when the contact entered the 'Other' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_SALESQUALIFIEDLEAD
+            description: The date and time when the contact entered the 'Sales Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_ENTERED_SUBSCRIBER
+            description: The date and time when the contact entered the 'Subscriber' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_CUSTOMER
+            description: The date and time when the contact exited the 'Customer' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_EVANGELIST
+            description: The date and time when the contact exited the 'Evangelist' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_LEAD
+            description: The date and time when the contact exited the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_MARKETINGQUALIFIEDLEAD
+            description: The date and time when the contact exited the 'Marketing Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_OPPORTUNITY
+            description: The date and time when the contact exited the 'Opportunity' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_OTHER
+            description: The date and time when the contact exited the 'Other' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_SALESQUALIFIEDLEAD
+            description: The date and time when the contact exited the 'Sales Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DATE_EXITED_SUBSCRIBER
+            description: The date and time when the contact exited the 'Subscriber' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_DOCUMENT_LAST_REVISITED
+            description: The last time a shared document (presentation) was accessed by this
+              contact
+          - name: PROPERTIES_HS_EMAILCONFIRMATIONSTATUS
+            description: The status of a contact's eligibility to receive marketing email.
+              This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_BAD_ADDRESS
+            description: The email address associated with this contact is invalid.
+          - name: PROPERTIES_HS_EMAIL_BOUNCE
+            description: The number of marketing emails that bounced for the current email
+              address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_CLICK
+            description: The number of marketing emails which have had link clicks for the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_CUSTOMER_QUARANTINED_REASON
+            description: The reason why the email address has been quarantined.
+          - name: PROPERTIES_HS_EMAIL_DELIVERED
+            description: The number of marketing emails delivered for the current email
+              address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_DOMAIN
+            description: A contact's email address domain
+          - name: PROPERTIES_HS_EMAIL_FIRST_CLICK_DATE
+            description: The date of the earliest link click for any marketing email to the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_FIRST_OPEN_DATE
+            description: The date of the earliest open for any marketing email to the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_FIRST_REPLY_DATE
+            description: The date of the earliest reply for any marketing email to the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_FIRST_SEND_DATE
+            description: The date of the earliest delivery for any marketing email to the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_HARD_BOUNCE_REASON
+            description: The issue that caused a contact to hard bounce from your emails. If
+              this is an error or a temporary issue, you can unbounce this
+              contact from the contact record.
+          - name: PROPERTIES_HS_EMAIL_HARD_BOUNCE_REASON_ENUM
+            description: The issue that caused a contact to hard bounce from your emails. If
+              this is an error or a temporary issue, you can unbounce this
+              contact from the contact record.
+          - name: PROPERTIES_HS_EMAIL_IS_INELIGIBLE
+            description: Indicates the contact is globally ineligible for email.
+          - name: PROPERTIES_HS_EMAIL_LAST_CLICK_DATE
+            description: The date of the most recent link click for any marketing email to
+              the current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_LAST_EMAIL_NAME
+            description: The name of the last marketing email sent to the current email
+              address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_LAST_OPEN_DATE
+            description: The date of the most recent open for any marketing email to the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_LAST_REPLY_DATE
+            description: The date of the latest reply for any marketing email to the current
+              email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_LAST_SEND_DATE
+            description: The date of the most recent delivery for any marketing email to the
+              current email address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_OPEN
+            description: The number of marketing emails opened for the current email
+              address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_OPTOUT
+            description: Indicates that the current email address has opted out of all
+              email.
+          - name: PROPERTIES_HS_EMAIL_OPTOUT_191110159
+            description: Indicates that the current email address has opted out of this
+              email type.
+          - name: PROPERTIES_HS_EMAIL_OPTOUT_329101965
+            description: Indicates that the current email address has opted out of this
+              email type.
+          - name: PROPERTIES_HS_EMAIL_QUARANTINED
+            description: Indicates that the current email address has been quarantined for
+              anti-abuse reasons and any marketing email sends to it will be
+              blocked. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_QUARANTINED_REASON
+            description: The automated reason why the email address has been quarantined.
+          - name: PROPERTIES_HS_EMAIL_RECIPIENT_FATIGUE_RECOVERY_TIME
+            description: When this recipient has reached the limit of email sends per time
+              period, this property indicates the next available time to send.
+              This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_REPLIED
+            description: The number of marketing emails replied to by the current email
+              address. This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_EMAIL_SENDS_SINCE_LAST_ENGAGEMENT
+            description: The number of marketing emails that have been sent to the current
+              email address since the last engagement (open or link click). This
+              is automatically set by HubSpot.
+          - name: PROPERTIES_HS_FACEBOOKID
+            description: A contact's facebook id
+          - name: PROPERTIES_HS_FACEBOOK_AD_CLICKED
+            description: Whether contact has clicked a Facebook ad
+          - name: PROPERTIES_HS_FACEBOOK_CLICK_ID
+            description: ""
+          - name: PROPERTIES_HS_FEEDBACK_LAST_NPS_FOLLOW_UP
+            description: Last NPS survey comment that this contact gave
+          - name: PROPERTIES_HS_FEEDBACK_LAST_NPS_RATING
+            description: Last NPS survey rating that this contact gave
+          - name: PROPERTIES_HS_FEEDBACK_LAST_SURVEY_DATE
+            description: The time that this contact last submitted a NPS survey response.
+              This is automatically set by HubSpot.
+          - name: PROPERTIES_HS_FEEDBACK_SHOW_NPS_WEB_SURVEY
+            description: Whether or not a contact should be shown an NPS web survey. This is
+              automatically set by HubSpot.
+          - name: PROPERTIES_HS_FIRST_ENGAGEMENT_OBJECT_ID
+            description: The object id of the current contact owner's first engagement with
+              the contact.
+          - name: PROPERTIES_HS_FIRST_OUTREACH_DATE
+            description: The date of the first outreach (call, email, meeting or other
+              communication) from a sales rep to the contact.
+          - name: PROPERTIES_HS_FIRST_SUBSCRIPTION_CREATE_DATE
+            description: The create date of the first subscription by the contact.
+          - name: PROPERTIES_HS_GOOGLEPLUSID
+            description: A contact's googleplus id
+          - name: PROPERTIES_HS_GOOGLE_CLICK_ID
+            description: ""
+          - name: PROPERTIES_HS_HAS_ACTIVE_SUBSCRIPTION
+            description: The rollup property value is 1 when the contact has an active
+              Subscription or 0 otherwise.
+          - name: PROPERTIES_HS_IP_TIMEZONE
+            description: The timezone reported by a contact's IP address. This is
+              automatically set by HubSpot and can be used for segmentation and
+              reporting.
+          - name: PROPERTIES_HS_IS_CONTACT
+            description: Is a contact, has not been deleted and is not a visitor
+          - name: PROPERTIES_HS_IS_UNWORKED
+            description: Contact  has  not  been  assigned  or  has  not  been  engaged  after  last  owner  assignment/re-assignment
+          - name: PROPERTIES_HS_JOURNEY_STAGE
+            description: Track the status of a contact through a customer journey. It can be
+              set through journeys, manually on a per contact basis, and through
+              other tools.
+          - name: PROPERTIES_HS_LANGUAGE
+            description: Set your contact's preferred language for communications. This
+              property can be changed from an import, form, or integration.
+          - name: PROPERTIES_HS_LASTMODIFIEDDATE
+            description: Most recent timestamp of any property update for this contact. This
+              includes HubSpot internal properties, which can be visible or
+              hidden. This property is updated automatically.
+          - name: PROPERTIES_HS_LAST_SALES_ACTIVITY_DATE
+            description: "The date of the last sales activity with the contact. This
+              property is set automatically by HubSpot. Note: This field is only
+              updated for contacts with an owner."
+          - name: PROPERTIES_HS_LAST_SALES_ACTIVITY_TIMESTAMP
+            description: The last time a contact engaged with your site or a form, document,
+              meetings link, or tracked email. This doesn't include marketing
+              emails or emails to multiple contacts.
+          - name: PROPERTIES_HS_LAST_SALES_ACTIVITY_TYPE
+            description: The type of the last engagement a contact performed. This doesn't
+              include marketing emails or emails to multiple contacts.
+          - name: PROPERTIES_HS_LATEST_DISQUALIFIED_LEAD_DATE
+            description: The most recent time at which an associated lead currently in a
+              disqualified stage was moved to that stage
+          - name: PROPERTIES_HS_LATEST_MEETING_ACTIVITY
+            description: The date of the most recent meeting (past or upcoming) logged for,
+              scheduled with, or booked by this contact.
+          - name: PROPERTIES_HS_LATEST_OPEN_LEAD_DATE
+            description: The most recent time an associated open lead was moved to a NEW or
+              IN_PROGRESS state
+          - name: PROPERTIES_HS_LATEST_QUALIFIED_LEAD_DATE
+            description: The most recent time at which an associated lead currently in a
+              qualified stage was moved to that stage
+          - name: PROPERTIES_HS_LATEST_SEQUENCE_ENDED_DATE
+            description: The last sequence ended date.
+          - name: PROPERTIES_HS_LATEST_SEQUENCE_ENROLLED
+            description: The last sequence enrolled.
+          - name: PROPERTIES_HS_LATEST_SEQUENCE_ENROLLED_DATE
+            description: The last sequence enrolled date.
+          - name: PROPERTIES_HS_LATEST_SEQUENCE_FINISHED_DATE
+            description: The last sequence finished date.
+          - name: PROPERTIES_HS_LATEST_SEQUENCE_UNENROLLED_DATE
+            description: The last sequence unenrolled date.
+          - name: PROPERTIES_HS_LATEST_SOURCE
+            description: The source of the latest session for a contact
+          - name: PROPERTIES_HS_LATEST_SOURCE_DATA_1
+            description: Additional information about the latest source for the last session
+              the contact used to find your website. Set automatically.
+          - name: PROPERTIES_HS_LATEST_SOURCE_DATA_2
+            description: Additional information about the source for the last session the
+              contact used to find your website. Set automatically.
+          - name: PROPERTIES_HS_LATEST_SOURCE_TIMESTAMP
+            description: The time of the latest session for a contact
+          - name: PROPERTIES_HS_LATEST_SUBSCRIPTION_CREATE_DATE
+            description: The create date of the latest subscription by the contact.
+          - name: PROPERTIES_HS_LEAD_STATUS
+            description: The contact's sales, prospecting or outreach status
+          - name: PROPERTIES_HS_LEGAL_BASIS
+            description: Legal basis for processing contact's data; 'Not applicable' will
+              exempt the contact from GDPR protections
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_CUSTOMER_DATE
+            description: The date when a contact's lifecycle stage changed to Customer. This
+              is automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_EVANGELIST_DATE
+            description: The date when a contact's lifecycle stage changed to Evangelist.
+              This is automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_LEAD_DATE
+            description: The date when a contact's lifecycle stage changed to Lead. This is
+              automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_MARKETINGQUALIFIEDLEAD_DATE
+            description: The date when a contact's lifecycle stage changed to MQL. This is
+              automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_OPPORTUNITY_DATE
+            description: The date when a contact's lifecycle stage changed to Opportunity.
+              This is automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_OTHER_DATE
+            description: The date when a contact's lifecycle stage changed to Other. This is
+              automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_SALESQUALIFIEDLEAD_DATE
+            description: The date when a contact's lifecycle stage changed to SQL. This is
+              automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LIFECYCLESTAGE_SUBSCRIBER_DATE
+            description: The date when a contact's lifecycle stage changed to Subscriber.
+              This is automatically set by HubSpot for each contact.
+          - name: PROPERTIES_HS_LINKEDINID
+            description: A contact's linkedin id
+          - name: PROPERTIES_HS_LINKEDIN_AD_CLICKED
+            description: ""
+          - name: PROPERTIES_HS_MARKETABLE_REASON_ID
+            description: The ID of the activity that set the contact as a marketing contact
+          - name: PROPERTIES_HS_MARKETABLE_REASON_TYPE
+            description: The type of the activity that set the contact as a marketing
+              contact
+          - name: PROPERTIES_HS_MARKETABLE_STATUS
+            description: The marketing status of a contact
+          - name: PROPERTIES_HS_MARKETABLE_UNTIL_RENEWAL
+            description: Specifies if this contact will be set as non-marketing on renewal
+          - name: PROPERTIES_HS_MERGED_OBJECT_IDS
+            description: The list of Contact record IDs that have been merged into this
+              Contact. This value is set automatically by HubSpot.
+          - name: PROPERTIES_HS_MOBILE_SDK_PUSH_TOKENS
+            description: This property is used to capture the push notification token for
+              use on the LiveChat mobile sdk. We intend to use this property to
+              store a list of push tokens (as they refresh) on the CONTACT
+              object.
+          - name: PROPERTIES_HS_NOTES_LAST_ACTIVITY
+            description: The coordinates of the last activity for a contact. This is set
+              automatically by HubSpot based on user actions in the contact
+              record.
+          - name: PROPERTIES_HS_NOTES_NEXT_ACTIVITY
+            description: The coordinates of the next upcoming activity for a contact. This
+              is set automatically by HubSpot based on user actions in the
+              contact record.
+          - name: PROPERTIES_HS_NOTES_NEXT_ACTIVITY_TYPE
+            description: The type of the next upcoming activity for a contact. This is set
+              automatically by HubSpot based on user actions in the contact
+              record.
+          - name: PROPERTIES_HS_OBJECT_ID
+            description: The unique ID for this record. This value is set automatically by
+              HubSpot.
+          - name: PROPERTIES_HS_OBJECT_SOURCE
+            description: Raw internal PropertySource present in the RequestMeta when this
+              record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_DETAIL_1
+            description: First level of detail on how this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_DETAIL_2
+            description: Second level of detail on how this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_DETAIL_3
+            description: Third level of detail on how this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_ID
+            description: Raw internal sourceId present in the RequestMeta when this record
+              was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_LABEL
+            description: How this record was created.
+          - name: PROPERTIES_HS_OBJECT_SOURCE_USER_ID
+            description: Raw internal userId present in the RequestMeta when this record was
+              created.
+          - name: PROPERTIES_HS_PERSONA
+            description: A contact's persona
+          - name: PROPERTIES_HS_PINNED_ENGAGEMENT_ID
+            description: The object ID of the current pinned engagement. This will only be
+              shown if there is already an association to the engagement.
+          - name: PROPERTIES_HS_PIPELINE
+            description: The pipeline with which this contact is currently associated
+          - name: PROPERTIES_HS_PREDICTIVECONTACTSCORE
+            description: A score calculated by HubSpot that represents a contact's
+              likelihood to become a customer
+          - name: PROPERTIES_HS_PREDICTIVECONTACTSCOREBUCKET
+            description: The rating of this contact based on their predictive lead score
+          - name: PROPERTIES_HS_PREDICTIVECONTACTSCORE_V_2
+            description: The probability that a contact will become a customer within the
+              next 90 days. This score is based on standard contact properties
+              and behavior.
+          - name: PROPERTIES_HS_PREDICTIVESCORINGTIER
+            description: A ranking system of contacts evenly assigned into four tiers.
+              Contacts in tier one are more likely to become customers than
+              contacts in tier four.
+          - name: PROPERTIES_HS_QUARANTINED_EMAILS
+            description: Lists all emails associated with this contact that have been
+              quarantined, with a source and reason.
+          - name: PROPERTIES_HS_READ_ONLY
+            description: Determines whether a record can be edited by a user.
+          - name: PROPERTIES_HS_SALES_EMAIL_LAST_CLICKED
+            description: The last time a tracked sales email was clicked by this user
+          - name: PROPERTIES_HS_SALES_EMAIL_LAST_OPENED
+            description: The last time a tracked sales email was opened by this contact.
+              This property does not update for emails that were sent to more
+              than one contact.
+          - name: PROPERTIES_HS_SALES_EMAIL_LAST_REPLIED
+            description: The last time a tracked sales email was replied to by this user.
+              This is set automatically by HubSpot based on user actions in the
+              contact record.
+          - name: PROPERTIES_HS_SA_FIRST_ENGAGEMENT_DATE
+            description: The date the current contact owner first engaged with the contact.
+          - name: PROPERTIES_HS_SA_FIRST_ENGAGEMENT_DESCR
+            description: A description of the current contact owner's first engagement with
+              the contact.
+          - name: PROPERTIES_HS_SA_FIRST_ENGAGEMENT_OBJECT_TYPE
+            description: The object type of the current contact owner's first engagement
+              with the contact.
+          - name: PROPERTIES_HS_SEARCHABLE_CALCULATED_INTERNATIONAL_MOBILE_NUMBER
+            description: Mobile number with country code
+          - name: PROPERTIES_HS_SEARCHABLE_CALCULATED_INTERNATIONAL_PHONE_NUMBER
+            description: Phone number with country code
+          - name: PROPERTIES_HS_SEARCHABLE_CALCULATED_MOBILE_NUMBER
+            description: Mobile number without country code
+          - name: PROPERTIES_HS_SEARCHABLE_CALCULATED_PHONE_NUMBER
+            description: Phone number without country code
+          - name: PROPERTIES_HS_SEQUENCES_ACTIVELY_ENROLLED_COUNT
+            description: The number of sequences actively enrolled.
+          - name: PROPERTIES_HS_SEQUENCES_ENROLLED_COUNT
+            description: The number of sequences enrolled.
+          - name: PROPERTIES_HS_SEQUENCES_IS_ENROLLED
+            description: A yes/no field that indicates whether the contact is currently in a
+              Sequence.
+          - name: PROPERTIES_HS_SHARED_TEAM_IDS
+            description: Additional teams whose users can access the Contact based on their
+              permissions. This can be set manually or through Workflows or
+              APIs.
+          - name: PROPERTIES_HS_SHARED_USER_IDS
+            description: Additional users that can access the Contact based on their
+              permissions. This can be set manually or through Workflows and
+              APIs.
+          - name: PROPERTIES_HS_SOCIAL_FACEBOOK_CLICKS
+            description: The number clicks on links shared on Facebook
+          - name: PROPERTIES_HS_SOCIAL_GOOGLE_PLUS_CLICKS
+            description: The number clicks on links shared on Google Plus
+          - name: PROPERTIES_HS_SOCIAL_LAST_ENGAGEMENT
+            description: The date of the most recent click on a published social message.
+              This is set automatically by HubSpot for each contact.
+          - name: PROPERTIES_HS_SOCIAL_LINKEDIN_CLICKS
+            description: The number clicks on links shared on LinkedIn
+          - name: PROPERTIES_HS_SOCIAL_NUM_BROADCAST_CLICKS
+            description: The number of clicks on published social messages. This is set
+              automatically by HubSpot for each contact.
+          - name: PROPERTIES_HS_SOCIAL_TWITTER_CLICKS
+            description: The number of times a contact clicked on links you shared on
+              Twitter through HubSpot. This is set automatically by HubSpot and
+              can be used for segmentation.
+          - name: PROPERTIES_HS_SOURCE_OBJECT_ID
+            description: The ID of the object from which the data was migrated. This is set
+              automatically during portal data migration.
+          - name: PROPERTIES_HS_SOURCE_PORTAL_ID
+            description: The ID of the portal from which the data was migrated. This is set
+              automatically during portal data migration.
+          - name: PROPERTIES_HS_TESTPURGE
+            description: testing purge
+          - name: PROPERTIES_HS_TESTROLLBACK
+            description: testing rollback
+          - name: PROPERTIES_HS_TIMEZONE
+            description: The contact’s time zone. This can be set automatically by HubSpot
+              based on other contact properties. It can also be set manually for
+              each contact.
+          - name: PROPERTIES_HS_TIME_BETWEEN_CONTACT_CREATION_AND_DEAL_CLOSE
+            description: ""
+          - name: PROPERTIES_HS_TIME_BETWEEN_CONTACT_CREATION_AND_DEAL_CREATION
+            description: ""
+          - name: PROPERTIES_HS_TIME_IN_CUSTOMER
+            description: The total time in seconds spent by the contact in the 'Customer'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_EVANGELIST
+            description: The total time in seconds spent by the contact in the 'Evangelist'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_LEAD
+            description: The total time in seconds spent by the contact in the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_MARKETINGQUALIFIEDLEAD
+            description: The total time in seconds spent by the contact in the 'Marketing
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_OPPORTUNITY
+            description: The total time in seconds spent by the contact in the 'Opportunity'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_OTHER
+            description: The total time in seconds spent by the contact in the 'Other'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_SALESQUALIFIEDLEAD
+            description: The total time in seconds spent by the contact in the 'Sales
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_IN_SUBSCRIBER
+            description: The total time in seconds spent by the contact in the 'Subscriber'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_TIME_TO_FIRST_ENGAGEMENT
+            description: Time it took current owner to do first qualifying engagement.
+          - name: PROPERTIES_HS_TIME_TO_MOVE_FROM_LEAD_TO_CUSTOMER
+            description: " How long it takes for a contact to move from the HubSpot lead
+              stage to the HubSpot customer stage."
+          - name: PROPERTIES_HS_TIME_TO_MOVE_FROM_MARKETINGQUALIFIEDLEAD_TO_CUSTOMER
+            description: " How long it takes for a contact to move from the HubSpot
+              marketing qualified lead stage to the HubSpot customer stage."
+          - name: PROPERTIES_HS_TIME_TO_MOVE_FROM_OPPORTUNITY_TO_CUSTOMER
+            description: " How long it takes for a contact to move from the HubSpot
+              opportunity stage to the HubSpot customer stage."
+          - name: PROPERTIES_HS_TIME_TO_MOVE_FROM_SALESQUALIFIEDLEAD_TO_CUSTOMER
+            description: " How long it takes for a contact to move from the HubSpot sales
+              qualified lead stage to the HubSpot customer stage."
+          - name: PROPERTIES_HS_TIME_TO_MOVE_FROM_SUBSCRIBER_TO_CUSTOMER
+            description: " How long it takes for a contact to move from the HubSpot
+              subscriber stage to the HubSpot customer stage."
+          - name: PROPERTIES_HS_TWITTERID
+            description: A contact's twitter id
+          - name: PROPERTIES_HS_UNIQUE_CREATION_KEY
+            description: Unique property used for idempotent creates
+          - name: PROPERTIES_HS_UPDATED_BY_USER_ID
+            description: The user who last updated this record. This value is set
+              automatically by HubSpot.
+          - name: PROPERTIES_HS_USER_IDS_OF_ALL_NOTIFICATION_FOLLOWERS
+            description: The user IDs of all users that have clicked follow within the
+              object to opt-in to getting follow notifications
+          - name: PROPERTIES_HS_USER_IDS_OF_ALL_NOTIFICATION_UNFOLLOWERS
+            description: The user IDs of all object owners that have clicked unfollow within
+              the object to opt-out of getting follow notifications
+          - name: PROPERTIES_HS_USER_IDS_OF_ALL_OWNERS
+            description: The user IDs of all owners of this record.
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_CUSTOMER
+            description: The cumulative time in seconds spent by the contact in the
+              'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_EVANGELIST
+            description: The cumulative time in seconds spent by the contact in the
+              'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_LEAD
+            description: The cumulative time in seconds spent by the contact in the 'Lead'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_MARKETINGQUALIFIEDLEAD
+            description: The cumulative time in seconds spent by the contact in the
+              'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline'
+              pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_OPPORTUNITY
+            description: The cumulative time in seconds spent by the contact in the
+              'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_OTHER
+            description: The cumulative time in seconds spent by the contact in the 'Other'
+              stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_SALESQUALIFIEDLEAD
+            description: The cumulative time in seconds spent by the contact in the 'Sales
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_CUMULATIVE_TIME_IN_SUBSCRIBER
+            description: The cumulative time in seconds spent by the contact in the
+              'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_CUSTOMER
+            description: The date and time when the contact entered the 'Customer' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_EVANGELIST
+            description: The date and time when the contact entered the 'Evangelist' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_LEAD
+            description: The date and time when the contact entered the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_MARKETINGQUALIFIEDLEAD
+            description: The date and time when the contact entered the 'Marketing Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_OPPORTUNITY
+            description: The date and time when the contact entered the 'Opportunity' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_OTHER
+            description: The date and time when the contact entered the 'Other' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_SALESQUALIFIEDLEAD
+            description: The date and time when the contact entered the 'Sales Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_ENTERED_SUBSCRIBER
+            description: The date and time when the contact entered the 'Subscriber' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_CUSTOMER
+            description: The date and time when the contact exited the 'Customer' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_EVANGELIST
+            description: The date and time when the contact exited the 'Evangelist' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_LEAD
+            description: The date and time when the contact exited the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_MARKETINGQUALIFIEDLEAD
+            description: The date and time when the contact exited the 'Marketing Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_OPPORTUNITY
+            description: The date and time when the contact exited the 'Opportunity' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_OTHER
+            description: The date and time when the contact exited the 'Other' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_SALESQUALIFIEDLEAD
+            description: The date and time when the contact exited the 'Sales Qualified
+              Lead' stage, 'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_DATE_EXITED_SUBSCRIBER
+            description: The date and time when the contact exited the 'Subscriber' stage,
+              'Lifecycle Stage Pipeline' pipeline
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_CUSTOMER
+            description: The total time in seconds spent by the contact in the 'Customer'
+              stage, 'Lifecycle Stage Pipeline' pipeline since it last entered
+              this stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_EVANGELIST
+            description: The total time in seconds spent by the contact in the 'Evangelist'
+              stage, 'Lifecycle Stage Pipeline' pipeline since it last entered
+              this stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_LEAD
+            description: The total time in seconds spent by the contact in the 'Lead' stage,
+              'Lifecycle Stage Pipeline' pipeline since it last entered this
+              stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_MARKETINGQUALIFIEDLEAD
+            description: The total time in seconds spent by the contact in the 'Marketing
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline since
+              it last entered this stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_OPPORTUNITY
+            description: The total time in seconds spent by the contact in the 'Opportunity'
+              stage, 'Lifecycle Stage Pipeline' pipeline since it last entered
+              this stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_OTHER
+            description: The total time in seconds spent by the contact in the 'Other'
+              stage, 'Lifecycle Stage Pipeline' pipeline since it last entered
+              this stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_SALESQUALIFIEDLEAD
+            description: The total time in seconds spent by the contact in the 'Sales
+              Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline since
+              it last entered this stage
+          - name: PROPERTIES_HS_V_2_LATEST_TIME_IN_SUBSCRIBER
+            description: The total time in seconds spent by the contact in the 'Subscriber'
+              stage, 'Lifecycle Stage Pipeline' pipeline since it last entered
+              this stage
+          - name: PROPERTIES_HS_WAS_IMPORTED
+            description: Object is part of an import
+          - name: PROPERTIES_HS_WHATSAPP_PHONE_NUMBER
+            description: The phone number associated with the contact’s WhatsApp account.
+          - name: PROPERTIES_HUBSPOTSCORE
+            description: The number that shows qualification of contacts to sales readiness.
+              It can be set in HubSpot's Lead Scoring app.
+          - name: PROPERTIES_HUBSPOT_OWNER_ASSIGNEDDATE
+            description: The most recent timestamp of when an owner was assigned to this
+              record. This value is set automatically by HubSpot.
+          - name: PROPERTIES_HUBSPOT_OWNER_ID
+            description: The owner of a contact. This can be any HubSpot user or Salesforce
+              integration user, and can be set manually or via Workflows.
+          - name: PROPERTIES_HUBSPOT_TEAM_ID
+            description: The team of the owner of a contact.
+          - name: PROPERTIES_INDUSTRY
+            description: The Industry a contact is in
+          - name: PROPERTIES_IP_CITY
+            description: The city reported by a contact's IP address. This is automatically
+              set by HubSpot and can be used for segmentation and reporting.
+          - name: PROPERTIES_IP_COUNTRY
+            description: The country reported by a contact's IP address. This is
+              automatically set by HubSpot and can be used for segmentation and
+              reporting.
+          - name: PROPERTIES_IP_COUNTRY_CODE
+            description: The country code reported by a contact's IP address. This is
+              automatically set by HubSpot and can be used for segmentation and
+              reporting.
+          - name: PROPERTIES_IP_LATLON
+            description: ""
+          - name: PROPERTIES_IP_STATE
+            description: The state or region reported by a contact's IP address. This is
+              automatically set by HubSpot and can be used for segmentation and
+              reporting.
+          - name: PROPERTIES_IP_STATE_CODE
+            description: The state code or region code reported by a contact's IP address.
+              This is automatically set by HubSpot and can be used for
+              segmentation and reporting.
+          - name: PROPERTIES_IP_ZIPCODE
+            description: The zipcode reported by a contact's IP address. This is
+              automatically set by HubSpot and can be used for segmentation and
+              reporting.
+          - name: PROPERTIES_JOBTITLE
+            description: A contact's job title
+          - name: PROPERTIES_JOB_FUNCTION
+            description: Contact's job function. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_KLOUTSCOREGENERAL
+            description: A contact's Klout score, a measure of Internet influence
+          - name: PROPERTIES_LASTMODIFIEDDATE
+            description: The date any property on this contact was modified
+          - name: PROPERTIES_LASTNAME
+            description: A contact's last name
+          - name: PROPERTIES_LIFECYCLESTAGE
+            description: The qualification of contacts to sales readiness. It can be set
+              through imports, forms, workflows, and manually on a per contact
+              basis.
+          - name: PROPERTIES_LINKEDINBIO
+            description: A contact's LinkedIn bio
+          - name: PROPERTIES_LINKEDINCONNECTIONS
+            description: How many LinkedIn connections they have
+          - name: PROPERTIES_MARITAL_STATUS
+            description: Contact's marital status. Required for the Facebook Ads
+              Integration. Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_MESSAGE
+            description: A default property to be used for any message or comments a contact
+              may want to leave on a form.
+          - name: PROPERTIES_MILITARY_STATUS
+            description: Contact's military status. Required for the Facebook Ads
+              Integration. Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_MOBILEPHONE
+            description: A contact's mobile phone number
+          - name: PROPERTIES_NOTES_LAST_CONTACTED
+            description: The last time a call, chat conversation, LinkedIn message, postal
+              mail, meeting, sales email, SMS, or WhatsApp message was logged
+              for a contact. This is set automatically by HubSpot based on user
+              actions in the contact record.
+          - name: PROPERTIES_NOTES_LAST_UPDATED
+            description: The last time a call, chat conversation, LinkedIn message, postal
+              mail, meeting, note, sales email, SMS, or WhatsApp message was
+              logged for a contact. This is set automatically by HubSpot based
+              on user actions in the contact record.
+          - name: PROPERTIES_NOTES_NEXT_ACTIVITY_DATE
+            description: The date of the next upcoming activity for a contact. This is set
+              automatically by HubSpot based on user actions in the contact
+              record.
+          - name: PROPERTIES_NUMEMPLOYEES
+            description: The number of company employees
+          - name: PROPERTIES_NUM_ASSOCIATED_DEALS
+            description: Count of deals associated with this contact. Set automatically by
+              HubSpot.
+          - name: PROPERTIES_NUM_CONTACTED_NOTES
+            description: The number of times a call, chat conversation, LinkedIn message,
+              postal mail, meeting, sales email, SMS, or WhatsApp message was
+              logged for a contact record. This is set automatically by HubSpot
+              based on user actions in the contact record.
+          - name: PROPERTIES_NUM_CONVERSION_EVENTS
+            description: The number of forms this contact has submitted
+          - name: PROPERTIES_NUM_NOTES
+            description: The number of times a call, chat conversation, LinkedIn message,
+              postal mail, meeting, note, sales email, SMS, task, or WhatsApp
+              message was logged for a contact record. This is set automatically
+              by HubSpot based on user actions in the contact record.
+          - name: PROPERTIES_NUM_UNIQUE_CONVERSION_EVENTS
+            description: The number of different forms this contact has submitted
+          - name: PROPERTIES_OWNEREMAIL
+            description: A legacy property used to identify the email address of the owner
+              of the contact. This property is no longer in use.
+          - name: PROPERTIES_OWNERNAME
+            description: A legacy property used to identify the name of the owner of the
+              contact. This property is no longer in use.
+          - name: PROPERTIES_PHONE
+            description: A contact's primary phone number
+          - name: PROPERTIES_PHOTO
+            description: Social Media photo
+          - name: PROPERTIES_RECENT_CONVERSION_DATE
+            description: The date this contact last submitted a form
+          - name: PROPERTIES_RECENT_CONVERSION_EVENT_NAME
+            description: The last form this contact submitted
+          - name: PROPERTIES_RECENT_DEAL_AMOUNT
+            description: Amount of last closed won deal associated with a contact. Set
+              automatically.
+          - name: PROPERTIES_RECENT_DEAL_CLOSE_DATE
+            description: Date last deal associated with contact was closed-won. Set
+              automatically.
+          - name: PROPERTIES_RELATIONSHIP_STATUS
+            description: Contact's relationship status. Required for the Facebook Ads
+              Integration. Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_SALUTATION
+            description: The title used to address a contact
+          - name: PROPERTIES_SCHOOL
+            description: Contact's school. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_SENIORITY
+            description: Contact's seniority. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_START_DATE
+            description: Contact's start date. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_STATE
+            description: The contact's state of residence. This might be set via import,
+              form, or integration.
+          - name: PROPERTIES_SURVEYMONKEYEVENTLASTUPDATED
+            description: This field is meaningless on its own, and is solely used for
+              triggering dynamic list updates when SurveyMonkey information is
+              updated
+          - name: PROPERTIES_TOTAL_REVENUE
+            description: Sum of all closed-won deal revenue associated with the contact. Set
+              automatically.
+          - name: PROPERTIES_TWITTERBIO
+            description: The contact's Twitter bio. This is set by HubSpot using the
+              contact's email address.
+          - name: PROPERTIES_TWITTERHANDLE
+            description: The contact's Twitter handle.
+          - name: PROPERTIES_TWITTERPROFILEPHOTO
+            description: The contact's Twitter profile photo. This is set by HubSpot using
+              the contact's email address.
+          - name: PROPERTIES_VEEVA_CLAIMS_USER
+            description: Whether the user is also a user in Veeva Claims Vault
+          - name: PROPERTIES_WEBINAREVENTLASTUPDATED
+            description: This field is meaningless on its own, and is solely used for
+              triggering dynamic list updates when webinar information is
+              updated
+          - name: PROPERTIES_WEBSITE
+            description: Associated company website.
+          - name: PROPERTIES_WORK_EMAIL
+            description: Contact's work email. Required for the Facebook Ads Integration.
+              Automatically synced from the Lead Ads tool.
+          - name: PROPERTIES_ZIP
+            description: The contact's zip code. This might be set via import, form, or
+              integration.
+          - name: UPDATED_AT
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: HUBSPOT_OWNERS
+        description: ""
+        columns:
+          - name: ARCHIVED
+            description: ""
+          - name: CREATED_AT
+            description: ""
+          - name: EMAIL
+            description: ""
+          - name: FIRST_NAME
+            description: ""
+          - name: ID
+            description: ""
+          - name: LAST_NAME
+            description: ""
+          - name: TEAMS
+            description: ""
+          - name: UPDATED_AT
+            description: ""
+          - name: USER_ID
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: OWNERS_UNMANAGED
+        description: ""
+        columns:
+          - name: ARCHIVED
+            description: ""
+          - name: CREATED_AT
+            description: ""
+          - name: EMAIL
+            description: ""
+          - name: FIRST_NAME
+            description: ""
+          - name: ID
+            description: ""
+          - name: LAST_NAME
+            description: ""
+          - name: TEAMS
+            description: ""
+          - name: UPDATED_AT
+            description: ""
+          - name: USER_ID
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: ZENDESK_TICKETS
+        description: ""
+        columns:
+          - name: ALLOW_ATTACHMENTS
+            description: ""
+          - name: ALLOW_CHANNELBACK
+            description: ""
+          - name: ASSIGNEE_ID
+            description: ""
+          - name: BRAND_ID
+            description: ""
+          - name: COLLABORATOR_IDS
+            description: Array of the ids of the user collaborators on the ticket
+          - name: CREATED_AT
+            description: ""
+          - name: CUSTOM_CUSTOM_CHECK_BOX
+            description: ""
+          - name: CUSTOM_CUSTOM_CREDITCARD
+            description: ""
+          - name: CUSTOM_CUSTOM_DATE
+            description: ""
+          - name: CUSTOM_CUSTOM_DECIMAL_FIELD_0
+            description: ""
+          - name: CUSTOM_CUSTOM_DECIMAL_FIELD_1
+            description: ""
+          - name: CUSTOM_CUSTOM_DROP_DOWN
+            description: ""
+          - name: CUSTOM_CUSTOM_FIELD_TEXT
+            description: ""
+          - name: CUSTOM_CUSTOM_LOOKUP_USER_
+            description: ""
+          - name: CUSTOM_CUSTOM_MULTILINE
+            description: ""
+          - name: CUSTOM_CUSTOM_MULTI_SELECT_FIELD
+            description: ""
+          - name: CUSTOM_CUSTOM_NUMBER_FIELD
+            description: ""
+          - name: CUSTOM_CUSTOM_REGEXAANEWNAME
+            description: ""
+          - name: CUSTOM_MUST_FIELD_NAME_BE_UNIQUE__0
+            description: ""
+          - name: CUSTOM_MUST_FIELD_NAME_BE_UNIQUE__1
+            description: ""
+          - name: CUSTOM_NEW_TEMP_FIELD
+            description: ""
+          - name: CUSTOM_STATUS_ID
+            description: ""
+          - name: CUSTOM__16536
+            description: ""
+          - name: DESCRIPTION
+            description: ""
+          - name: DUE_AT
+            description: ""
+          - name: EMAIL_CC_IDS
+            description: Array of the ids of the users currently CC'd on the ticket
+          - name: EXTERNAL_ID
+            description: ""
+          - name: FOLLOWER_IDS
+            description: Array of the ids of the users currently following the ticket
+          - name: FOLLOWUP_IDS
+            description: ""
+          - name: FORUM_TOPIC_ID
+            description: ""
+          - name: FROM_MESSAGING_CHANNEL
+            description: ""
+          - name: GROUP_ID
+            description: ""
+          - name: HAS_INCIDENTS
+            description: ""
+          - name: ID
+            description: ""
+          - name: IS_PUBLIC
+            description: ""
+          - name: ORGANIZATION_ID
+            description: ""
+          - name: PRIORITY
+            description: ""
+          - name: PROBLEM_ID
+            description: ""
+          - name: RAW_SUBJECT
+            description: ""
+          - name: RECIPIENT
+            description: ""
+          - name: REQUESTER_ID
+            description: ""
+          - name: SATISFACTION_RATING
+            description: ""
+          - name: SHARING_AGREEMENT_IDS
+            description: ""
+          - name: STATUS
+            description: ""
+          - name: SUBJECT
+            description: ""
+          - name: SUBMITTER_ID
+            description: ""
+          - name: TICKET_FORM_ID
+            description: ""
+          - name: TYPE
+            description: ""
+          - name: UPDATED_AT
+            description: ""
+          - name: URL
+            description: ""
+          - name: VIA_CHANNEL
+            description: ""
+          - name: VIA_SOURCE_FROM
+            description: ""
+          - name: VIA_SOURCE_REL
+            description: ""
+          - name: VIA_SOURCE_TO
+            description: ""
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+  - database: STAGING_PERSISTED
+    name: wayfare_unmanaged
+    description: Unmanaged sources in the warehouse
+    schema: _WAYFARE
+    tables:
+      - name: ACTIVATION_FAILURES_8296AB52
+        description: ""
+        columns:
+          - name: ID
+            description: ""
+          - name: WAYFARE_ACTIVATION_ID
+            description: The id of the activation whose job result in this failure.
+          - name: WAYFARE_ERROR
+            description: A description of what went wrong during the activation of this
+              record.
+          - name: WAYFARE_JOB_ID
+            description: The id of the activation job in which this activation failure
+              occured.
+          - name: WAYFARE_TEMPORARY_RECORD_ID
+            description: The temporary id of the record. Used to identify records even when
+              they don't have a key.
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
+      - name: DIFF_HUBSPOT_CONTACTS_8296AB52
+        description: ""
+        columns:
+          - name: ID
+            description: ""
+          - name: WAYFARE_ACTUAL_OP
+            description: The operation that ended up being performed by the activation
+              connector.
+          - name: WAYFARE_ERROR
+            description: Any error encountered by the activation connector when handling the
+              record.
+          - name: WAYFARE_IS_ACK
+            description: Whether the diff engine heard back from the activation connector
+              about this record.
+          - name: WAYFARE_IS_SUCCESS
+            description: Whether the activation connector handled the record successfully.
+          - name: WAYFARE_JOB_ID
+            description: The id of the activation job that processed the record most
+              recently.
+          - name: WAYFARE_PLANNED_OP
+            description: The operation that was last planned for a record by the diff
+              engine.
+          - name: WAYFARE_RESPONSE
+            description: An optional custom format string that the activation connector can
+              optionally return, meant to be consumed by other warehouse models.
+          - name: _WAYFARE_CREATED_AT
+            description: The transaction time at which the row was created by Wayfare
+          - name: _WAYFARE_UPDATED_AT
+            description: The transaction time at which the row was last updated by Wayfare
