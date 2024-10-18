@@ -1,1 +1,1 @@
-SELECT blns_dataset.blns_col AS TOTAL_COST FROM {{ source('dummy_sync', 'blns_dataset') }} AS blns_dataset
+SELECT blns_dataset.blns_col AS TOTAL_COST FROM {{ source('dummy_sync', 'BLNS_DATASET') }} AS blns_dataset
